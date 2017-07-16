@@ -1,0 +1,113 @@
+{extend name="common/base" /}
+{block name="content"}
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:url('index/index')}">系统</a>
+            </li>
+            <li>
+                <a href="{:url('config/index')}">配置管理</a>
+            </li>
+            <li class="active">站点配置</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">站点配置</span>
+                    </div>
+                    <div class="widget-body">
+                        <div id="horizontal-form">
+                            <form class="form-horizontal" role="form" action="" method="post">
+                                {volist name="list" id="vo"}
+                                {switch name="$vo.type"}
+                                {case value="1"}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" name="{$vo.enname}" value="{$vo.value}" type="text">
+                                    </div>
+                                </div>
+                                {/case}
+                                {case value="2"}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                                    <div class="col-sm-6">
+                                        <textarea class="form-control" name="{$vo.enname}">{$vo.value}</textarea>
+                                    </div>
+                                </div>
+                                {/case}
+                                {case value="3"}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                                    <div class="col-sm-6">
+                                        <div class="control-group">
+                                            <div class="radio">
+                                                {php}$arr = explode(',',$vo['values']);{/php}
+                                                {volist name="arr" id="v"}
+                                                <label>
+                                                    <input name="{$vo.enname}" type="radio" value="{$v}" {if condition="$vo.value eq $v"}checked{/if}>
+                                                    <span class="text">{$v}</span>
+                                                </label>
+                                                {/volist}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/case}
+                                {case value="4"}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                                    <div class="col-sm-6">
+                                        <div class="checkbox">
+                                            {php}$arr = explode(',',$vo['values']);{/php}
+                                            {volist name="arr" id="v"}
+                                            <label>
+                                                <input type="checkbox" name="{$vo.enname}" value="{$v}" class="colored-success" {if condition="$vo.value eq $v"}checked{/if}>
+                                                <span class="text">{$v}</span>
+                                            </label>
+                                            {/volist}
+                                        </div>
+                                    </div>
+                                </div>
+                                {/case}
+                                {case value="5"}
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                                    <div class="col-sm-6">
+                                        {php}$arr = explode(',',$vo['values']);{/php}
+                                        <select name="{$vo.enname}" style="width: 100%;">
+                                            <option>-----选择-----</option>
+                                            {volist name="arr" id="v"}
+                                            <option {if condition="$vo.value eq $v"}selected="selected"{/if} value="{$v}">{$v}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
+                                </div>
+                                {/case}
+                                {/switch}
+                                {/volist}
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">保存信息</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+{/block}

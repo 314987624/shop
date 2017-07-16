@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>后台管理</title>
+
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="/static/admin/style/bootstrap.css" rel="stylesheet">
+    <link href="/static/admin/style/font-awesome.css" rel="stylesheet">
+    <link href="/static/admin/style/weather-icons.css" rel="stylesheet">
+
+    <!--Beyond styles-->
+    <link id="beyond-link" href="/static/admin/style/beyond.css" rel="stylesheet" type="text/css">
+    <link href="/static/admin/style/demo.css" rel="stylesheet">
+    <link href="/static/admin/style/typicons.css" rel="stylesheet">
+    <link href="/static/admin/style/animate.css" rel="stylesheet">
+
+    <script src="/static/admin/style/jquery_002.js"></script>
+</head>
+<body>
+	<!-- 头部 -->
+    {include file="common/header"}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+            <!-- Page Sidebar -->
+            {include file="common/left"}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            {block name="content"}主内容{/block}
+            <!-- /Page Content -->
+		</div>	
+	</div>
+
+    <!--Basic Scripts-->
+    <script src="/static/admin/style/bootstrap.js"></script>
+    <script src="/static/admin/style/jquery.js"></script>
+    <!--Beyond Scripts-->
+    <script src="/static/admin/style/beyond.js"></script>
+</body>
+</html>

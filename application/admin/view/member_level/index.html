@@ -1,0 +1,67 @@
+{extend name="common/base" /}
+{block name="content"}
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:url('index/index')}">系统</a>
+            </li>
+            <li class="active">会员等级管理</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <button type="button" tooltip="新增等级" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('member_level/add')}';"> <i class="fa fa-plus"></i> Add
+        </button>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-body">
+                        <div class="flip-scroll">
+                            <table class="table table-bordered table-hover">
+                                <thead class="">
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">等级名称</th>
+                                    <th class="text-center">积分下限</th>
+                                    <th class="text-center">积分上限</th>
+                                    <th class="text-center">折扣率</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {volist name="list" id="vo"}
+                                <tr>
+                                    <td align="center">{$vo.id}</td>
+                                    <td align="center">{$vo.level_name}</td>
+                                    <td align="center">{$vo.points_min}</td>
+                                    <td align="center">{$vo.points_max}</td>
+                                    <td align="center">{$vo.rate}</td>
+                                    <td align="center">
+                                        <a href="{:url('member_level/edit',['id' => $vo.id])}" class="btn btn-primary btn-sm shiny">
+                                            <i class="fa fa-edit"></i> 编辑
+                                        </a>
+                                        <a href="#" onClick="warning('确实要删除吗', '{:url('member_level/del',['id' => $vo.id])}')" class="btn btn-danger btn-sm shiny">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+{/block}

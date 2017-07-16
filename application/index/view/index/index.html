@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="Generator" content="ECSHOP v2.7.3">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Keywords" content="{$site_config.keywords}">
+    <meta name="Description" content="{$site_config.description}">
+    <title>{$site_config.name}</title>
+    <link rel="shortcut icon" href="mbmeilishuo/favicon.ico">
+    <link rel="icon" href="mbmeilishuo/animated_favicon.gif" type="image/gif">
+    <link href="/static/style/style.css" rel="stylesheet" type="text/css">
+    <link rel="alternate" type="application/rss+xml" title="RSS|童老师thinkphp交流群：484519446 - Powered by ECShop"
+          href="mbmeilishuo/feed.php">
+    <script src="style/hm.js"></script>
+    <script type="text/javascript" src="style/common.js"></script>
+    <script type="text/javascript" src="style/index.js"></script>
+</head>
+<body class="index_page" style="min-width:1200px;">
+
+{include file="common/header"}
+
+<style type="text/css">
+    .container, .container * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        width: 100%;
+        height: 419px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .slider {
+        position: absolute;
+        width: 100%;
+        height: 419px;
+    }
+
+    .slider li, .slider li a {
+        list-style: none;
+        float: left;
+        width: 100%;
+        height: 419px;
+    }
+
+    .slider img {
+        width: 100%;
+        height: 419px;
+        display: block;
+    }
+
+    .slider2 {
+        width: 2000px;
+    }
+
+    .slider2 li {
+        float: left;
+    }
+
+    .num {
+        position: absolute;
+        right: 5px;
+        bottom: 5px;
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    .num li {
+        float: left;
+        color: #f69;
+        text-align: center;
+        line-height: 16px;
+        width: 16px;
+        height: 16px;
+        font-family: Arial;
+        font-size: 12px;
+        cursor: pointer;
+        overflow: hidden;
+        margin: 3px 1px;
+        border: 1px solid #f69;
+        background-color: #fff;
+    }
+
+    .num li.on {
+        color: #fff;
+        line-height: 21px;
+        width: 21px;
+        height: 21px;
+        font-size: 16px;
+        margin: 0 1px;
+        border: 0;
+        background-color: #f69;
+        font-weight: bold;
+    }
+</style>
+<link href="/static/style/flexslider.css" type="text/css" rel="stylesheet" />
+<div style="overflow: hidden; position: relative;" class="container" id="idTransformView">
+    <!-- 代码begin -->
+    <div class="flexslider">
+        <ul class="slides">
+            <li style="background:url(/static/images/img1.jpg) 50% 0 no-repeat;"></li>
+            <li style="background:url(/static/images/img2.jpg) 50% 0 no-repeat;"></li>
+            <li style="background:url(/static/images/img3.jpg) 50% 0 no-repeat;"></li>
+            <li style="background:url(/static/images/img4.jpg) 50% 0 no-repeat;"></li>
+            <li style="background:url(/static/images/img5.jpg) 50% 0 no-repeat;"></li>
+        </ul>
+    </div>
+    <!-- 代码end -->
+    <!-- js调用部分begin -->
+    <script src="/static/style/jquery.flexslider-min.js"></script>
+    <script>
+        $(function(){
+            $('.flexslider').flexslider({
+                directionNav: true,
+                pauseOnAction: false
+            });
+        });
+    </script>
+    <!-- js调用部分end -->
+</div>
+
+
+<div class="blank5"></div>
+<div class="blank"></div>
+<div class="blank"></div>
+<div class="block clearfix">
+    <script type="text/javascript">
+        //初始化主菜单
+        function sw_nav2(obj, tag) {
+            var DisSub2 = document.getElementById("DisSub2_" + obj);
+            var HandleLI2 = document.getElementById("HandleLI2_" + obj);
+            if (tag == 1) {
+                DisSub2.style.display = "block";
+                HandleLI2.className = "current";
+            }
+            else {
+                DisSub2.style.display = "none";
+                HandleLI2.className = "";
+            }
+        }
+    </script>
+
+
+    <div id="category_tree">
+        <dl class="clearfix" style=" margin-top:-455px; z-index: 999;filter:alpha(opacity=90);-moz-opacity:0.9;opacity:0.9;">
+            {volist name="cate_list" id="vo" key="k"}
+            <div class="dt" onmouseover="sw_nav2({$k},1);" onmouseout="sw_nav2({$k},0);">
+                <div class="" id="HandleLI2_{$k}">
+                    <a class="a" href="mbmeilishuo/category.php?id=132">
+                        {$vo.cate_name}<img src="/static/images/biao8.gif">
+                    </a>
+                </div>
+                <dd id="DisSub2_{$k}" style="display: none;">
+                    {volist name="vo.child" id="vo2"}
+                    <a class="over_2" href="mbmeilishuo/category.php?id=138">{$vo2.cate_name}</a>
+                    <div class="clearfix">
+                        {volist name="vo2.child" id="vo3"}
+                        <a class="over_3" href="mbmeilishuo/category.php?id=139">{$vo3.cate_name}</a>
+                        {/volist}
+                    </div>
+                    {/volist}
+                </dd>
+            </div>
+            {/volist}
+        </dl>
+    </div>
+    <div class="AreaL">
+
+        <div class="box">
+            <div class="box_1">
+                <h3>
+                    <span><a href="mbmeilishuo/article_cat.php?id=12">站内快讯</a></span>
+                    <a href="mbmeilishuo/article_cat.php?id=12"><img src="/static/images/more.gif" alt="more"></a>
+                </h3>
+                <div class="boxCenterList RelaArticle">
+                    <a href="mbmeilishuo/article.php?id=41" title="卡帕春装仅需139起！重庆九龙坡自提点变更！">卡帕春装仅需139起！重庆九龙坡自提点变更！</a>
+                    2012-03-01<br>
+                    <a href="mbmeilishuo/article.php?id=40" title="春天花花读书会6折封顶苏川辽大家电配送范围扩">春天花花读书会6折封顶苏川辽大家电配送范围扩</a>
+                    2012-03-01<br>
+                    <a href="mbmeilishuo/article.php?id=39" title="酷派7260黑白首发试用用电视也能上京东购物">酷派7260黑白首发试用用电视也能上京东购物</a>
+                    2012-03-01<br>
+                    <a href="mbmeilishuo/article.php?id=38" title="3.8女人节电脑数码攻略!重庆江北自提点变更！">3.8女人节电脑数码攻略!重庆江北自提点变更！</a>
+                    2012-03-01<br>
+                </div>
+            </div>
+        </div>
+        <div class="blank5"></div>
+
+    </div>
+    <div class="Arear">
+        <div class="sale_box clearfix">
+            <h3><span>特价商品</span></h3>
+
+            <div class="clearfix">
+                {volist name="cheapgoods" id="vo"}
+                <ul class="clearfix">
+                    <li class="goodsimg">
+                        <a href="#">
+                            <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="B_blue" border="0">
+                        </a>
+                    </li>
+                    <li>
+                        <p><a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a></p>
+                        促销价：<font class="f1">{$vo.shop_price}元</font>
+                    </li>
+                </ul>
+                {/volist}
+            </div>
+        </div>
+
+        <div class="blank" style="height:1px;"></div>
+
+    </div>
+    <div class="goodsBox_1">
+
+
+        <div class="xm-box">
+            <h4 class="title"><span>新品上架</span> <a class="more" href="mbmeilishuo/search.php?intro=new">更多</a></h4>
+            <div id="show_new_area" class="clearfix">
+                {volist name="newgoods" id="vo"}
+                <div class="goodsItem">
+                    <a href="#">
+                        <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
+                    <p class="f1">
+                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                    </p>
+                    市场价：<font class="market">{$vo.market_price}元</font><br>
+                    本店价：<font class="f1">{$vo.shop_price}元</font>
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="blank"></div>
+        <div class="xm-box">
+            <h4 class="title"><span>热卖商品</span> <a class="more" href="mbmeilishuo/search.php?intro=hot">更多</a></h4>
+            <div id="show_hot_area" class="clearfix">
+                {volist name="hotgoods" id="vo"}
+                <div class="goodsItem">
+                    <a href="#">
+                        <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
+                    <p class="f1">
+                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                    </p>
+                    市场价：<font class="market">{$vo.market_price}元</font><br>
+                    本店价：<font class="f1">{$vo.shop_price}元</font>
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="blank"></div>
+        <div class="xm-box">
+            <h4 class="title"><span>精品推荐</span> <a class="more" href="mbmeilishuo/search.php?intro=best">更多</a></h4>
+            <div id="show_best_area" class="clearfix">
+                {volist name="bestgoods" id="vo"}
+                <div class="goodsItem">
+                    <a href="#">
+                        <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
+                    <p class="f1">
+                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                    </p>
+                    市场价：<font class="market">{$vo.market_price}元</font><br>
+                    本店价：<font class="f1">{$vo.shop_price}元</font>
+                </div>
+                {/volist}
+            </div>
+        </div>
+        <div class="blank"></div>
+
+        <div class="xm-box">
+            <h4 class="title"><span>女装</span> <a class="more" href="mbmeilishuo/category.php?id=21">更多</a></h4>
+            <div id="show_hot_area" class="clearfix">
+
+                <div class="goodsItem">
+
+                    <a href="mbmeilishuo/goods.php?id=134"><img src="/static/images/134_thumb_G_1413930635678.jpg"
+                                                                alt="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气质长袖针织衫+半身裙 两件套连衣裙套装"
+                                                                class="goodsimg"></a><br>
+                    <p class="f1"><a href="mbmeilishuo/goods.php?id=134"
+                                     title="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气质长袖针织衫+半身裙 两件套连衣裙套装"></a></p>
+
+
+                    市场价：<font class="market">144元</font> <br>
+
+                    本店价：<font class="f1">
+                    110元 </font>
+
+                </div>
+                <div class="goodsItem">
+
+                    <a href="mbmeilishuo/goods.php?id=136"><img src="/static/images/136_thumb_G_1413930502490.jpg"
+                                                                alt="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸靴" class="goodsimg"></a><br>
+                    <p class="f1"><a href="mbmeilishuo/goods.php?id=136" title="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸靴"></a>
+                    </p>
+
+
+                    市场价：<font class="market">144元</font> <br>
+
+                    本店价：<font class="f1">
+                    110元 </font>
+
+                </div>
+                <div class="goodsItem">
+
+                    <a href="mbmeilishuo/goods.php?id=140"><img src="/static/images/140_thumb_G_1413928959052.jpg"
+                                                                alt="毛貂毛边卫衣套装" class="goodsimg"></a><br>
+                    <p class="f1"><a href="mbmeilishuo/goods.php?id=140" title="毛貂毛边卫衣套装"></a></p>
+
+
+                    市场价：<font class="market">144元</font> <br>
+
+                    本店价：<font class="f1">
+                    110元 </font>
+
+                </div>
+                <div class="goodsItem">
+
+                    <a href="mbmeilishuo/goods.php?id=208"><img src="/static/images/208_thumb_G_1419373849576.png"
+                                                                alt="简约纯色时尚保暖" class="goodsimg"></a><br>
+                    <p class="f1"><a href="mbmeilishuo/goods.php?id=208" title="简约纯色时尚保暖"></a></p>
+
+
+                    市场价：<font class="market">120元</font> <br>
+
+                    本店价：<font class="f1">
+                    100元 </font>
+
+                </div>
+                <div class="goodsItem">
+
+                    <a href="mbmeilishuo/goods.php?id=141"><img src="/static/images/141_thumb_G_1413926445469.jpg"
+                                                                alt="高质感毛呢大衣" class="goodsimg"></a><br>
+                    <p class="f1"><a href="mbmeilishuo/goods.php?id=141" title="高质感毛呢大衣"></a></p>
+
+
+                    市场价：<font class="market">144元</font> <br>
+
+                    本店价：<font class="f1">
+                    110元 </font>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="blank"></div>
+    </div>
+
+</div>
+
+
+<a href="http://www.chuanke.com/s2260700.html/" class="ecmoban">ecshop童老师</a>
+
+{include file="common/footer"}
+
+<script type="text/javascript">
+    //<![CDATA[
+    var tips;
+    var theTop = 120/*这是默认高度,越大越往下*/;
+    var old = theTop;
+    function initFloatTips() {
+        tips = document.getElementById('divQQbox');
+        moveTips();
+    }
+    ;
+    function moveTips() {
+        var tt = 50;
+        if (window.innerHeight) {
+            pos = window.pageYOffset
+        }
+        else if (document.documentElement && document.documentElement.scrollTop) {
+            pos = document.documentElement.scrollTop
+        }
+        else if (document.body) {
+            pos = document.body.scrollTop;
+        }
+        pos = pos - tips.offsetTop + theTop;
+        pos = tips.offsetTop + pos / 10;
+        if (pos < theTop) pos = theTop;
+        if (pos != old) {
+            tips.style.top = pos + "px";
+            tt = 10;
+//alert(tips.style.top);
+        }
+        old = pos;
+        setTimeout(moveTips, tt);
+    }
+    //!]]>
+    initFloatTips();
+    function OnlineOver() {
+        document.getElementById("divMenu").style.display = "none";
+        document.getElementById("divOnline").style.display = "block";
+        document.getElementById("divQQbox").style.width = "170px";
+    }
+    function OnlineOut() {
+        document.getElementById("divMenu").style.display = "block";
+        document.getElementById("divOnline").style.display = "none";
+    }
+    if (typeof(HTMLElement) != "undefined")    //给firefox定义contains()方法，ie下不起作用
+    {
+        HTMLElement.prototype.contains = function (obj) {
+            while (obj != null && typeof(obj.tagName) != "undefind") { //通过循环对比来判断是不是obj的父元素
+                if (obj == this) return true;
+                obj = obj.parentNode;
+            }
+            return false;
+        };
+    }
+    function hideMsgBox(theEvent) { //theEvent用来传入事件，Firefox的方式
+        if (theEvent) {
+            var browser = navigator.userAgent; //取得浏览器属性
+            if (browser.indexOf("Firefox") > 0) { //如果是Firefox
+                if (document.getElementById('divOnline').contains(theEvent.relatedTarget)) { //如果是子元素
+                    return; //结束函式
+                }
+            }
+            if (browser.indexOf("MSIE") > 0) { //如果是IE
+                if (document.getElementById('divOnline').contains(event.toElement)) { //如果是子元素
+                    return; //结束函式
+                }
+            }
+        }
+        /*要执行的操作*/
+        document.getElementById("divMenu").style.display = "block";
+        document.getElementById("divOnline").style.display = "none";
+    }
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d7e112eaeea65921aeaadcc0af8f2853";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</body>
+</html>

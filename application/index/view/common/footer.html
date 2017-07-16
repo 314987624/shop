@@ -1,0 +1,107 @@
+<div class="footer">
+    <div class="foot_con">
+        <div class="f_list service_info">
+            <div class="kefu"><span class="tel_ico"></span>
+                <p class="f20_f">4000-021-758</p>
+                <p class="f14_f mt4_f">客服热线</p>
+            </div>
+            <ol class="business">
+                <li>周一至周日：09:00-22:00</li>
+            </ol>
+        </div>
+
+        {volist name="help" id="vo"}
+        <div class="f_list">
+            <h4>{$vo.name}</h4>
+            <ul>
+                {volist name="vo.article" id="vo2"}
+                <li><a target="_blank" href="" title="{$vo2.title}">{$vo2.title}</a></li>
+                {/volist}
+            </ul>
+        </div>
+        {/volist}
+
+        <div class="f_list">
+            <h4>关注我们</h4>
+            <ul>
+                <li class="sina_attention"><a href="http://weibo.com/ECMBT/home?topnav=1&amp;wvr=5"
+                                              target="_blank"><span class="i_sina">&nbsp;</span>新浪微博</a></li>
+                <li><a href="#" target="_blank"><span class="i_qzone">&nbsp;</span>QQ空间</a></li>
+                <li><a href="#" target="_blank"><span class="i_tx">&nbsp;</span>腾讯微博</a></li>
+            </ul>
+        </div>
+        <div class="f_list qr-code">
+            <h4>微信服务号</h4>
+            <img src="/static/images/weixinfuwuhao.png" alt=""></div>
+        <div class="f_list weixin_code">
+            <h4>客户端下载</h4>
+            <a class="client_pic" href="http://www.chuanke.com/s2260700.html" target="_blank"></a></div>
+        <div class="blank"></div>
+
+
+        <div class="blank"></div>
+
+        <div id="bottomNav" class="rolling">
+            <h4 class="f_links">底部导航：</h4>
+            <ul id="link_slide">
+                <li>
+                    {volist name="bot_nav" id="vo"}
+                    <a href="{$vo.nav_url}" {if condition="$vo.nav_blank eq 1"}target="_blank"{/if}>{$vo.nav_name}</a>
+                    {/volist}
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="text" style="height:1px ; width:1px; overflow:hidden;">
+
+            Tel: 123456
+
+
+            <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin=851818184&amp;Site=%E9%BC%8E%E6%96%B0%E6%96%87%E5%8C%96QQ851818184&amp;Menu=yes"
+               target="_blank"><img src="/static/images/pa.gif" alt="QQ" border="0" height="16"> 851818184</a>
+
+
+            <img src="/static/images/msn.gif" alt="MSN" border="0" height="17" width="18"> <a
+                href="msnim:chat?contact=ecmoban@msn.com">ecmoban@msn.com</a>
+
+
+            <br>
+        </div>
+        <div class="record"> © 2005-2016 版权所有，并保留所有权利。 &nbsp; <a href="#" target="_blank">电信与信息服务业务经营许可证100798号</a>&nbsp;
+            <a href="#" target="_blank">企业法人营业执照</a>&nbsp; {$site_config.beian}&nbsp; 京公网安备110108006045&nbsp;<br>
+            客服邮箱：kf@mobantang.com&nbsp;&nbsp;客服电话：4000-021-758&nbsp; 文明办网文明上网举报电话：010-0000000 &nbsp; <a href="#"
+                                                                                                        target="_blank">违法不良信息举报中心</a>
+        </div>
+    </div>
+    <div class="blank10"></div>
+
+</div>
+<div class="blank"></div>
+
+<link href="/static/style/qq.css" rel="stylesheet" type="text/css">
+<div class="QQbox" id="divQQbox" style="width: 170px; top: 124.5px;">
+    <div class="Qlist" id="divOnline" onmouseout="hideMsgBox(event);" style="display: none; "
+         onmouseover="OnlineOver();">
+        <div class="t"></div>
+        <div class="infobox">我们营业的时间<br>9:00-18:00</div>
+        <div class="con">
+            <ul>
+
+
+                <li>
+                    <a href="http://wpa.qq.com/msgrd?V=1&amp;Uin=851818184&amp;Site=%E9%BC%8E%E6%96%B0%E6%96%87%E5%8C%96QQ851818184&amp;Menu=yes"
+                       target="_blank"><img src="/static/images/pa.gif" alt="QQ" border="0" height="16"> 851818184</a>
+                </li>
+                <li><img src="/static/images/msn.gif" alt="MSN" border="0" height="17" width="18"> <a
+                        href="msnim:chat?contact=ecmoban@msn.com">ecmoban@msn.com</a></li>
+
+
+                <li> 服务热线: 123456</li>
+            </ul>
+        </div>
+        <div class="b"></div>
+    </div>
+    <div id="divMenu" onmouseover="OnlineOver();" style="display: block; "><img src="/static/images/qq_1.gif"
+                                                                                class="press" alt="在线咨询"></div>
+</div>

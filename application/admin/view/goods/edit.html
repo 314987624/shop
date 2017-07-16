@@ -1,0 +1,377 @@
+{extend name="common/base" /}
+{block name="content"}
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <a href="{:url('index/index')}">系统</a>
+            </li>
+            <li>
+                <a href="{:url('goods/index')}">商品管理</a>
+            </li>
+            <li class="active">添加商品</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+
+    <!-- Page Body -->
+    <div class="page-body">
+
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-blue">
+                        <span class="widget-caption">新增商品</span>
+                    </div>
+                    <div class="widget-body">
+                        <div id="horizontal-form">
+                            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                                <div class="widget-main ">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs tabs-flat" id="myTab11">
+                                            <li class="active">
+                                                <a data-toggle="tab" href="#home1">
+                                                    基本信息
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#home2">
+                                                    商品描述
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#home3">
+                                                    会员价格
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#home4">
+                                                    商品属性
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#home5">
+                                                    商品图片
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content tabs-flat">
+                                            <div id="home1" class="tab-pane active">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">商品名称</label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" placeholder="" name="goods_name" value="{$data.goods_name}" required="" type="text">
+                                                    </div>
+                                                    <p class="help-block col-sm-4 red">* 必填</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">所属分类</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="cate_id" style="width: 100%;">
+                                                            <option value="0">-----选择分类-----</option>
+                                                            {volist name="cate_list" id="vo"}
+                                                            <option {if condition="$data.cate_id eq $vo.id"}selected="selected"{/if} value="{$vo.id}">{:str_repeat('-----',$vo.level)}{$vo.cate_name}</option>
+                                                            {/volist}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">所属品牌</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="brand_id" style="width: 100%;">
+                                                            <option value="0">-----选择品牌-----</option>
+                                                            {volist name="brand_list" id="vo"}
+                                                            <option {if condition="$data.brand_id eq $vo.id"}selected="selected"{/if} value="{$vo.id}">{$vo.brand_name}</option>
+                                                            {/volist}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">市场价格</label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" placeholder="" name="market_price" value="{$data.market_price}" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">本店价格</label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" placeholder="" name="shop_price" value="{$data.shop_price}" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">商品重量</label>
+                                                    <div class="col-sm-6">
+                                                        <input style="width: 30%; float: left; margin-right: 20px;" class="form-control" placeholder="" name="goods_weight" value="{$data.goods_weight}" type="text">
+                                                        <select name="weight_unit">
+                                                            <option {if condition="$data.weight_unit eq 0"}selected="selected"{/if} value="0">克</option>
+                                                            <option {if condition="$data.weight_unit eq 1"}selected="selected"{/if} value="1">千克</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">商品缩略图</label>
+                                                    <div class="col-sm-6">
+                                                        <input placeholder="" name="file" type="file">
+                                                        {if condition="$data.sm_thumb neq null"}<img src="/{$data.sm_thumb}"/>{else/}暂无缩略图{/if}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">是否上架</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="control-group">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input name="onsale" type="radio" value="1" {if condition="$data.onsale eq 1"}checked="checked"{/if}>
+                                                                    <span class="text">上架 </span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input name="onsale" type="radio" value="0" {if condition="$data.onsale eq 0"}checked="checked"{/if}>
+                                                                    <span class="text">下架</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">推荐位</label>
+                                                    <div class="col-sm-6">
+                                                        <div class="control-group">
+                                                            <div class="radio">
+                                                                {if condition="$recpos_list neq null"}
+                                                                {volist name="recpos_list" id="vo"}
+                                                                <label style="margin-right: 10px;">
+                                                                    <input name="recid[]" type="checkbox" value="{$vo.id}" {php}if(in_array($vo['id'],$recids)){echo 'checked';}{/php}>
+                                                                    <span class="text">{$vo.recname}</span>
+                                                                </label>
+                                                                {/volist}
+                                                                {else/}
+                                                                暂无推荐位
+                                                                {/if}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="home2" class="tab-pane">
+                                                <textarea style="width: 100%;" id="container" name="goods_desc">{$data.goods_desc}</textarea>
+                                            </div>
+
+                                            <div id="home3" class="tab-pane">
+                                                {volist name="member_price" id="vo"}
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">{$vo.level_name}</label>
+                                                    <div class="col-sm-6">
+                                                        <input class="form-control" placeholder="" name="mps[{$vo.id}]" value="{$vo.price}" type="text">
+                                                    </div>
+                                                </div>
+                                                {/volist}
+                                            </div>
+
+                                            <div id="home4" class="tab-pane">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">商品类型</label>
+                                                    <div class="col-sm-6">
+                                                        <select {if condition="$data.type_id neq 0"}disabled="disabled"{/if} name="type_id" style="width: 100%;">
+                                                            <option value="0">-----选择类型-----</option>
+                                                            {volist name="type_list" id="vo"}
+                                                            <option {if condition="$data.type_id eq $vo.id"}selected="selected"{/if} value="{$vo.id}">{$vo.type_name}</option>
+                                                            {/volist}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div id="attr">
+                                                    {volist name="attr_list" id="vo"}
+                                                        {if condition="$vo.attr_type eq 0"}
+                                                            {if condition="$vo.attr_value eq ''"}
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2 control-label no-padding-right">{$vo.attr_name}</label>
+                                                                <div class="col-sm-6">
+                                                                    <input type="hidden" name="old_attr_id[{$vo.id}][]" value="{$goods_attr_list[$vo.id][0]['id']}"/>
+                                                                    <input style="width: 80%;" class="form-control" placeholder="" name="old_attr_value[{$vo.id}][]" value="{$goods_attr_list[$vo.id][0]['attr_value']}" type="text">
+                                                                    <input name="old_attr_price[{$vo.id}][]" value="0" type="hidden">
+                                                                </div>
+                                                            </div>
+                                                            {else/}
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2 control-label no-padding-right">{$vo.attr_name}</label>
+                                                                <div class="col-sm-6">
+                                                                    {php}$arr = explode(',',$vo['attr_value']);{/php}
+                                                                    <input type="hidden" name="old_attr_id[{$vo.id}][]" value="{$goods_attr_list[$vo.id][0]['id']}"/>
+                                                                    <select name="old_attr_value[{$vo.id}][]" style="width: 80%;">
+                                                                        {volist name="arr" id="vo2"}
+                                                                        <option {if condition="$goods_attr_list[$vo.id][0]['attr_value'] eq $vo2"}selected="selected"{/if}>{$vo2}</option>
+                                                                        {/volist}
+                                                                    </select>
+                                                                    <input name="old_attr_price[{$vo.id}][]" value="0" type="hidden">
+                                                                </div>
+                                                            </div>
+                                                            {/if}
+                                                        {else/}
+                                                        {foreach name="goods_attr_list[$vo.id]" item="vo3" key="k"}
+                                                        <div class="form-group" attrid="{$vo3.id}">
+                                                            <label class="col-sm-2 control-label no-padding-right">
+                                                                <a href="javascript:;" onclick="attr(this)">{if condition="$k eq 0"}[+]{else/}[-]{/if}</a>{$vo.attr_name}
+                                                            </label>
+                                                            <div class="col-sm-6">
+                                                                {php}$arr = explode(',',$vo['attr_value']);{/php}
+                                                                <input type="hidden" name="old_attr_id[{$vo.id}][]" value="{$vo3.id}"/>
+                                                                <select name="old_attr_value[{$vo.id}][]" style="width: 40%; float: left; margin-right: 10%;">
+                                                                    {volist name="arr" id="vo2"}
+                                                                    <option {if condition="$vo3['attr_value'] eq $vo2"}selected="selected"{/if}>{$vo2}</option>
+                                                                    {/volist}
+                                                                </select>
+                                                                <input style="width: 30%;" class="form-control" placeholder="增加的价格" name="old_attr_price[{$vo.id}][]" value="{$vo3.attr_price}" type="text">
+                                                            </div>
+                                                        </div>
+                                                        {/foreach}
+                                                        {/if}
+                                                    {/volist}
+                                                </div>
+                                            </div>
+
+                                            <div id="home5" class="tab-pane">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right">商品图片</label>
+                                                    <div class="col-sm-6">
+                                                        <ul style="padding: 0;">
+                                                            {volist name="goods_pic" id="vo"}
+                                                            <li picid="{$vo.id}" style="list-style: none; float: left; margin-right: 5px;">
+                                                                <img src="/{$vo.sm_thumb}"/><br/>
+                                                                <a href="javascript:;" onclick="delPic(this)">删除</a>
+                                                            </li>
+                                                            {/volist}
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label no-padding-right"><a id="addImg" href="javascript:;">[+]</a></label>
+                                                    <div class="col-sm-6">
+                                                        <input placeholder="" name="files[]" type="file">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-default">保存信息</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /Page Body -->
+</div>
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="/static/admin/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/static/admin/ueditor/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container',{
+        initialFrameHeight: 300
+    });
+
+    var str = '<div class="form-group"><label class="col-sm-2 control-label no-padding-right"><a href="javascript:;" onclick="delImg(this)">[-]</a></label><div class="col-sm-6"><input placeholder="" name="files[]" type="file"></div></div>';
+    $('#addImg').click(function(){
+        $('#home5').append(str);
+    });
+
+    function delImg(o){
+        $(o).parent().parent().remove();
+    }
+
+    function delPic(o){
+        if(confirm('确定删除吗')){
+            var li = $(o).parent();
+            var url = "{:url('ajaxDelPic')}/id/"+li.attr('picid');
+            $.ajax({
+                type:'get',
+                url:url,
+                success:function(){
+                    li.remove();
+                }
+            });
+        }
+    }
+
+    function attr(o){
+        var div = $(o).parent().parent();
+        if($(o).text() == '[+]'){
+            var cdiv = div.clone();
+            cdiv.find('a').text('[-]');
+            cdiv.removeAttr('attrid');
+            cdiv.find('input:eq(0)').remove();
+            var select = cdiv.find('select');
+            var s_oldname = select.attr('name');
+            var s_newname = s_oldname.replace('old_','');
+            select.attr('name',s_newname);
+            var input = cdiv.find('input');
+            var i_oldname = input.attr('name');
+            var i_newname = i_oldname.replace('old_','');
+            input.attr('name',i_newname);
+            div.after(cdiv);
+        }else{
+            if(confirm('确定删除吗？')){
+                var url = "{:url('ajaxDelGoodsAttr')}/id/"+div.attr('attrid');;
+                $.ajax({
+                    type:'get',
+                    url:url,
+                    success:function(){
+                        div.remove();
+                    }
+                });
+            }
+            $(o).parent().parent().remove();
+        }
+    }
+
+    $("select[name=type_id]").change(function(){
+        var url = "{:url('ajaxGetAttr')}/type_id/"+$(this).val();
+        $.ajax({
+            type:'get',
+            url:url,
+            dataType:'json',
+            success:function(data){
+                var str = '';
+                $(data).each(function(k,v){
+                    if(v.attr_type == 0){
+                        if(v.attr_value == ''){
+                            str += '<div class="form-group"><label class="col-sm-2 control-label no-padding-right">'+v.attr_name+'</label><div class="col-sm-6"><input style="width: 80%;" class="form-control" placeholder="" name="attr_value['+v.id+'][]" type="text"><input name="attr_price['+v.id+'][]" value="0" type="hidden"></div></div>';
+                        }else{
+                            var arr = v.attr_value.split(',');
+                            str += '<div class="form-group"><label class="col-sm-2 control-label no-padding-right">'+v.attr_name+'</label><div class="col-sm-6"><select name="attr_value['+v.id+'][]" style="width: 80%;">';
+                            for(var i=0;i<arr.length;i++){
+                                str += '<option>'+arr[i]+'</option>';
+                            }
+                            str += '</select><input name="attr_price['+v.id+'][]" value="0" type="hidden"></div></div>';
+                        }
+                    }else{
+                        var arr = v.attr_value.split(',');
+                        str += '<div class="form-group"><label class="col-sm-2 control-label no-padding-right"><a href="javascript:;" onclick="attr(this)">[+]</a>'+v.attr_name+'</label><div class="col-sm-6"><select name="attr_value['+v.id+'][]" style="width: 40%; float: left; margin-right: 10%;">';
+                        for(var i=0;i<arr.length;i++){
+                            str += '<option>'+arr[i]+'</option>';
+                        }
+                        str += '</select><input style="width: 30%;" class="form-control" placeholder="增加的价格" name="attr_price['+v.id+'][]" type="text"></div></div>';
+                    }
+                });
+                $("#attr").html(str);
+            }
+        });
+    });
+</script>
+
+{/block}

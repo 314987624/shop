@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="Generator" content="ECSHOP v2.7.3">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+
+    <title>用户中心</title>
+
+    <link rel="shortcut icon" href="mbmeilishuo/favicon.ico">
+    <link rel="icon" href="mbmeilishuo/animated_favicon.gif" type="image/gif">
+    <link href="/static/style/style.css" rel="stylesheet" type="text/css">
+
+    <script src="/static/style/hm.js"></script>
+    <script type="text/javascript" src="/static/style/common.js"></script>
+    <!--<script type="text/javascript" src="/static/style/user.js"></script>-->
+    <!--<script type="text/javascript" src="/static/style/transport.js"></script>-->
+</head>
+<body>
+
+{include file="common/header"}
+
+<div class="block block1">
+    <div class="block box">
+        <div class="blank"></div>
+        <div id="ur_here">
+            当前位置: <a href="mbmeilishuo/">首页</a> <code>&gt;</code> 用户中心
+        </div>
+    </div>
+    <div class="blank"></div>
+
+    <div class="usBox clearfix">
+        <div class="usBox_1 f_l">
+            <div class="login_tab">
+                <ul>
+                    <li class="active"><a href="{:url('user/login')}">用户登录</a></li>
+                    <li><a href="{:url('user/reg')}">用户注册</a></li>
+                </ul>
+            </div>
+            <form name="formLogin" action="" method="post" onsubmit="return userLogin()">
+                <table align="left" border="0" cellpadding="3" cellspacing="5" width="100%">
+                    <tbody>
+                    <tr>
+                        <td align="right" width="25%">用户名</td>
+                        <td width="65%"><input name="username" size="25" class="inputBg" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">密码</td>
+                        <td>
+                            <input name="password" size="15" class="inputBg" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">验证码</td>
+                        <td><input size="8" name="captcha" class="inputBg" type="text">
+                            <img src="{:captcha_src()}" alt="captcha" style="vertical-align: middle;cursor: pointer; height: 30px;"
+                                 onclick="this.src='{:captcha_src()}?'+Math.random()"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input value="1" name="remember" id="remember" type="checkbox"><label for="remember">请保存我这次的登录信息。</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td align="left">
+                            <input value="会员登录" type="submit">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><a href="mbmeilishuo/user.php?act=qpassword_name"
+                               class="f3">密码问题找回密码</a>&nbsp;&nbsp;&nbsp;<a href="mbmeilishuo/user.php?act=get_password"
+                                                                           class="f3">注册邮件找回密码</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div class="blank"></div>
+        </div>
+
+        <div class="usTxt">
+            <a href="http://bbs.ecmoban.com/" title="" target="_blank"><img
+                    alt="" src="/static/images/ecmoban.jpg"></a></div>
+    </div>
+
+
+</div>
+<div class="blank"></div>
+
+{include file="common/footer"}
+
+<script type="text/javascript">
+    //<![CDATA[
+    var tips;
+    var theTop = 120/*这是默认高度,越大越往下*/;
+    var old = theTop;
+    function initFloatTips() {
+        tips = document.getElementById('divQQbox');
+        moveTips();
+    }
+    ;
+    function moveTips() {
+        var tt = 50;
+        if (window.innerHeight) {
+            pos = window.pageYOffset
+        }
+        else if (document.documentElement && document.documentElement.scrollTop) {
+            pos = document.documentElement.scrollTop
+        }
+        else if (document.body) {
+            pos = document.body.scrollTop;
+        }
+        pos = pos - tips.offsetTop + theTop;
+        pos = tips.offsetTop + pos / 10;
+        if (pos < theTop) pos = theTop;
+        if (pos != old) {
+            tips.style.top = pos + "px";
+            tt = 10;
+//alert(tips.style.top);
+        }
+        old = pos;
+        setTimeout(moveTips, tt);
+    }
+    //!]]>
+    initFloatTips();
+    function OnlineOver() {
+        document.getElementById("divMenu").style.display = "none";
+        document.getElementById("divOnline").style.display = "block";
+        document.getElementById("divQQbox").style.width = "170px";
+    }
+    function OnlineOut() {
+        document.getElementById("divMenu").style.display = "block";
+        document.getElementById("divOnline").style.display = "none";
+    }
+    if (typeof(HTMLElement) != "undefined")    //给firefox定义contains()方法，ie下不起作用
+    {
+        HTMLElement.prototype.contains = function (obj) {
+            while (obj != null && typeof(obj.tagName) != "undefind") { //通过循环对比来判断是不是obj的父元素
+                if (obj == this) return true;
+                obj = obj.parentNode;
+            }
+            return false;
+        };
+    }
+    function hideMsgBox(theEvent) { //theEvent用来传入事件，Firefox的方式
+        if (theEvent) {
+            var browser = navigator.userAgent; //取得浏览器属性
+            if (browser.indexOf("Firefox") > 0) { //如果是Firefox
+                if (document.getElementById('divOnline').contains(theEvent.relatedTarget)) { //如果是子元素
+                    return; //结束函式
+                }
+            }
+            if (browser.indexOf("MSIE") > 0) { //如果是IE
+                if (document.getElementById('divOnline').contains(event.toElement)) { //如果是子元素
+                    return; //结束函式
+                }
+            }
+        }
+        /*要执行的操作*/
+        document.getElementById("divMenu").style.display = "block";
+        document.getElementById("divOnline").style.display = "none";
+    }
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d7e112eaeea65921aeaadcc0af8f2853";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<!--<script type="text/javascript">-->
+    <!--var process_request = "正在处理您的请求...";-->
+    <!--var username_empty = "- 用户名不能为空。";-->
+    <!--var username_shorter = "- 用户名长度不能少于 3 个字符。";-->
+    <!--var username_invalid = "- 用户名只能是由字母数字以及下划线组成。";-->
+    <!--var password_empty = "- 登录密码不能为空。";-->
+    <!--var password_shorter = "- 登录密码不能少于 6 个字符。";-->
+    <!--var confirm_password_invalid = "- 两次输入密码不一致";-->
+    <!--var email_empty = "- Email 为空";-->
+    <!--var email_invalid = "- Email 不是合法的地址";-->
+    <!--var agreement = "- 您没有接受协议";-->
+    <!--var msn_invalid = "- msn地址不是一个有效的邮件地址";-->
+    <!--var qq_invalid = "- QQ号码不是一个有效的号码";-->
+    <!--var home_phone_invalid = "- 家庭电话不是一个有效号码";-->
+    <!--var office_phone_invalid = "- 办公电话不是一个有效号码";-->
+    <!--var mobile_phone_invalid = "- 手机号码不是一个有效号码";-->
+    <!--var msg_un_blank = "* 用户名不能为空";-->
+    <!--var msg_un_length = "* 用户名最长不得超过7个汉字";-->
+    <!--var msg_un_format = "* 用户名含有非法字符";-->
+    <!--var msg_un_registered = "* 用户名已经存在,请重新输入";-->
+    <!--var msg_can_rg = "* 可以注册";-->
+    <!--var msg_email_blank = "* 邮件地址不能为空";-->
+    <!--var msg_email_registered = "* 邮箱已存在,请重新输入";-->
+    <!--var msg_email_format = "* 邮件地址不合法";-->
+    <!--var msg_blank = "不能为空";-->
+    <!--var no_select_question = "- 您没有完成密码提示问题的操作";-->
+    <!--var passwd_balnk = "- 密码中不能包含空格";-->
+    <!--var username_exist = "用户名 %s 已经存在";-->
+<!--</script>-->
+
+</body>
+</html>
