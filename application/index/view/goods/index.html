@@ -60,247 +60,21 @@
             <div class="tit">所有商品分类</div>
             <dl class="clearfix" style=" overflow:hidden;">
                 <div class="box1 cate" id="cate">
-                    <h1 onclick="tab(0)" style="border-top:none">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=22" class="  f_l">T恤/POLO</a>
+                    {volist name="cate_list" id="vo"}
+                    <h1 onclick="tab({$key})" {if condition="$key eq 0"}style="border-top:none"{/if}>
+                        <span class="f_l">
+                            <img src="/static/images/btn_fold.gif" style="padding-top:10px;padding-right:6px;cursor:pointer;">
+                        </span>
+                        <a href="" class="  f_l">{$vo.cate_name}</a>
                     </h1>
                     <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=23">POLO衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=26">短袖T恤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=27">长袖T恤</a>
-
-                        <div class="clearfix">
-                        </div>
+                        {volist name="vo.child" id="vo2"}
+                        <a class="over_2" href="">{$vo2.cate_name}</a>
+                        <div class="clearfix"></div>
+                        {/volist}
                     </ul>
                     <div style="clear:both"></div>
-                    <h1 onclick="tab(1)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=29" class="  f_l">衬衫</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=30">长袖衬衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=32">短袖衬衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=33">分袖衬衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(2)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=34" class="  f_l">裤子</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=35">牛仔分裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=36">牛仔短裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=37">休闲裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=38">牛仔裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=630">休闲短裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=631">哈伦裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=632">连身裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=633">打底裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=634">西裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(3)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=39" class="  f_l">外套</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=40">卫衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=41">西装</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=42">羽绒服</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=43">棉服</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=624">皮衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=625">夹克</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=626">风衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=627">大衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(4)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=110" class="  f_l">针织衫</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=114">套头衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=115">开衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=628">短袖针织衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(5)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=124" class="  f_l">裙</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=125">半裙</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=126">连衣裙</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=127">吊带裙</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(6)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=635" class="  f_l">中老年服装</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=636">T恤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=637">针织衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=638">衬衫</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=639">裤装</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=640">裙装</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-                    <h1 onclick="tab(7)">
-
-
-                        <span class="f_l"><img src="/static/images/btn_fold.gif"
-                                               style="padding-top:10px;padding-right:6px;cursor:pointer;"></span>
-                        <a href="/mbmeilishuo/category.php?id=641" class="  f_l">内衣</a>
-                    </h1>
-                    <ul style="display:none">
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=642">文胸</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=643">内裤</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=644">睡衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=645">美体内衣</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=646">套装/打底</a>
-
-                        <div class="clearfix">
-                        </div>
-                        <a class="over_2" href="/mbmeilishuo/category.php?id=647">丝袜/裤袜</a>
-
-                        <div class="clearfix">
-                        </div>
-                    </ul>
-                    <div style="clear:both"></div>
-
+                    {/volist}
                 </div>
                 <div style="clear:both"></div>
             </dl>
@@ -314,13 +88,13 @@
             function tab(id) {
                 if (obj_ul.item(id).style.display == "block") {
                     obj_ul.item(id).style.display = "none"
-                    obj_img.item(id).src = "themes/ecmoban_meilishuo/images/btn_fold.gif"
+                    obj_img.item(id).src = "/static/images/btn_fold.gif"
                     return false;
                 }
                 else(obj_ul.item(id).style.display == "none")
                 {
                     obj_ul.item(id).style.display = "block"
-                    obj_img.item(id).src = "themes/ecmoban_meilishuo/images/btn_unfold.gif"
+                    obj_img.item(id).src = "/static/images/btn_fold.gif"
                 }
             }
         </script>
@@ -364,25 +138,25 @@
         <div id="goodsInfo" class="clearfix">
 
             <div class="imgInfo">
-                <link href="/static/style/fangdajing.css" rel="stylesheet" type="text/css" />
+                <link href="/static/style/fangdajing.css" rel="stylesheet" type="text/css"/>
                 <div id="preview" class="spec-preview">
-                    <span class="jqzoom"><img jqimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" /></span>
+                    <span class="jqzoom">
+                        <img jqimg="/{$data.original}" src="/{$data.max_thumb}"/>
+                    </span>
                 </div>
-                <div class="spec-scroll"> <a class="prev">&lt;</a> <a class="next">&gt;</a>
+                <div class="spec-scroll"><a class="prev">&lt;</a> <a class="next">&gt;</a>
                     <div class="items">
                         <ul>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b2.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s2.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b3.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s3.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b3.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s3.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b2.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s2.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b2.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s2.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b2.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s2.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b1.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s1.jpg" onmousemove="preview(this);"></li>
-                            <li><img bimg="http://demo.lanrenzhijia.com/2014/jd0912/images/b2.jpg" src="http://demo.lanrenzhijia.com/2014/jd0912/images/s2.jpg" onmousemove="preview(this);"></li>
+                            <li>
+                                <img bimg="/{$data.original}" src="/{$data.max_thumb}"
+                                     onmousemove="preview(this);">
+                            </li>
+                            {volist name="goods_pic" id="vo"}
+                            <li>
+                                <img bimg="/{$vo.original}" src="/{$vo.max_thumb}"
+                                     onmousemove="preview(this);">
+                            </li>
+                            {/volist}
                         </ul>
                     </div>
                 </div>
@@ -392,26 +166,21 @@
 
             <div class="textInfo">
                 <form action="javascript:addToCart(140)" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
-                    <h1 class="clearfix">
-                        毛貂毛边卫衣套装 </h1>
-
+                    <h1 class="clearfix">{$data.goods_name} </h1>
 
                     <ul class="ul2 clearfix">
                         <li class="clearfix" style="width:100%">
                             <dd>
-
-
-                                <strong>本店售价：</strong><font class="shop" id="ECS_SHOPPRICE">120元</font>
-
-
-                                <font class="market">144元</font>
+                                <strong>本店售价：</strong>
+                                <font class="shop" id="ECS_SHOPPRICE">{$data.shop_price}元</font>
+                                <font class="market">{$data.market_price}元</font>
                             </dd>
                         </li>
 
 
                         <li class="clearfix">
                             <dd>
-                                <strong>商品货号：</strong>ECS000140
+                                <strong>商品货号：</strong>{$data.goods_sn}
                             </dd>
                         </li>
                         <li class="clearfix">
@@ -424,41 +193,22 @@
                         <li class="clearfix">
                             <dd>
 
-                                <strong>商品品牌：</strong><a href="/mbmeilishuo/brand.php?id=6">天翼</a>
+                                <strong>商品品牌：</strong><a href="{$data.brand_url}">{$data.brand_name}</a>
 
                             </dd>
                         </li>
                         <li class="clearfix">
                             <dd>
-
-                                <strong>商品重量：</strong>0克
+                                <strong>商品重量：</strong>{$data.goods_weight}
+                                {if condition="$data.weight_unit eq 0"}克{else/}千克{/if}
                             </dd>
                         </li>
 
-                        <li class="clearfix">
-                            <dd>
-
-                                <strong>上架时间：</strong>2013-10-02
-                            </dd>
-                        </li>
-                        <li class="clearfix">
-                            <dd>
-
-                                <strong>商品点击数：</strong>1339
-                            </dd>
-                        </li>
                     </ul>
 
 
                     <ul>
 
-
-                        <script type="text/javascript" src="style/lefttime.js"></script>
-                        <li class="padd loop" style="margin-bottom:5px; border-bottom:1px dashed #ccc;">
-                            <strong>促销价：</strong><font class="shop">110元</font><br>
-                            <strong>剩余时间：</strong>
-                            <font class="f4" id="leftTime">2296天01小时41分钟26秒</font><br>
-                        </li>
 
 
                         <li class="clearfix">
@@ -473,38 +223,29 @@
                             </dd>
                         </li>
 
-
-                        <li class="clearfix">
-                            <dd>
-                                <strong>购买此商品可使用：</strong><font class="f4">100 积分</font>
-                            </dd>
-                        </li>
                     </ul>
                     <ul class="bnt_ul">
 
-
+                        {volist name="radio_attr" id="vo"}
                         <li class="padd loop">
-                            <strong>颜色：</strong>
-
-                            <select name="spec_245" onchange="changePrice()">
-                                <option selected="selected" label="红" value="2265">红</option>
-                                <option label="蓝" value="2266">蓝</option>
-                                <option label="黄" value="2267">黄</option>
-                            </select>
-                            <input name="spec_list" value="2" type="hidden">
+                            <strong>{$vo[0]['attr_name']}：</strong>
+                            {volist name="vo" id="vo2"}
+                            {if condition="$key eq 0"}
+                            <label style="margin-right: 10px;"><input checked name="attr[{$vo2.attr_id}]" value="" type="radio">{$vo2.attr_value}
+                                {if condition="$vo2.attr_price neq 0"}
+                                <font color="red">[+{$vo2.attr_price}元]</font>
+                                {/if}
+                            </label>
+                            {else/}
+                            <label style="margin-right: 10px;"><input name="attr[{$vo2.attr_id}]" value="" type="radio">{$vo2.attr_value}
+                                {if condition="$vo2.attr_price neq 0"}
+                                <font color="red">[+{$vo2.attr_price}元]</font>
+                                {/if}
+                            </label>
+                            {/if}
+                            {/volist}
                         </li>
-                        <li class="padd loop">
-                            <strong>尺寸：</strong>
-
-                            <select name="spec_246" onchange="changePrice()">
-                                <option selected="selected" label="XL" value="2268">XL</option>
-                                <option label="L" value="2269">L</option>
-                                <option label="M" value="2270">M</option>
-                                <option label="XXL" value="2271">XXL</option>
-                            </select>
-                            <input name="spec_list" value="3" type="hidden">
-                        </li>
-
+                        {/volist}
 
                         <li class="clearfix">
                             <dd>
@@ -539,161 +280,11 @@
             </div>
             <div class="box_1">
                 <div id="com_v" class="  " style="padding:6px;">
-                    <p>&nbsp;</p>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/de9cee1a3fce50be001fdb161b69_640_1260_2_1.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 640px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/de9cee1a3fce50be001fdb161b69_640_1260_2_2.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 550px; width: 640px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/9c0b542ad856214e6ca2b818909d_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/9c0b542ad856214e6ca2b818909d_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/65d4a6fbc66d92b90958edf56648_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/65d4a6fbc66d92b90958edf56648_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <p class="pro_txt"
-                       style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                        &nbsp;</p>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/e21a0c3a15b37de005b6b1f9b69e_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
-                    <div class="more_pic"
-                         style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                        <img src="/static/images/e21a0c3a15b37de005b6b1f9b69e_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                             class="load_img"
-                             style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                    </div>
+                    无
                 </div>
                 <div class="none" id="com_h">
                     <blockquote>
-                        <p>&nbsp;</p>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/de9cee1a3fce50be001fdb161b69_640_1260_2_1.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 640px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/de9cee1a3fce50be001fdb161b69_640_1260_2_2.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 550px; width: 640px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/9c0b542ad856214e6ca2b818909d_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/9c0b542ad856214e6ca2b818909d_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/65d4a6fbc66d92b90958edf56648_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/65d4a6fbc66d92b90958edf56648_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <p class="pro_txt"
-                           style="margin: 0px 20px; padding: 0px 0px 10px; overflow: hidden; line-height: 24px; color: rgb(102, 102, 102); font-family: Arial;">
-                            &nbsp;</p>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/e21a0c3a15b37de005b6b1f9b69e_800_1125_2_1.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 710px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
-                        <div class="more_pic"
-                             style="margin: 0px 20px; padding: 0px; overflow: hidden; text-align: center; color: rgb(102, 102, 102); font-family: Arial;">
-                            <img src="/static/images/e21a0c3a15b37de005b6b1f9b69e_800_1125_2_2.jpg" alt="毛貂毛边卫衣套装"
-                                 class="load_img"
-                                 style="border: 0px; display: block; margin-left: auto; margin-right: auto; background-image: url(http://i.meilishuo.net/css/images/share/loading.gif); height: 288px; width: 710px; background-position: 50% 50%; background-repeat: no-repeat no-repeat;">
-                        </div>
+                        {:html_entity_decode($data.goods_desc)}
                     </blockquote>
 
                     <blockquote>
@@ -702,18 +293,12 @@
                             <tr>
                                 <th colspan="2" bgcolor="#FFFFFF">商品属性</th>
                             </tr>
+                            {volist name="only_attr" id="vo"}
                             <tr>
-                                <td class="f1" align="left" bgcolor="#FFFFFF" width="30%">[花型]</td>
-                                <td align="left" bgcolor="#FFFFFF" width="70%">小碎花</td>
+                                <td class="f1" align="left" bgcolor="#FFFFFF" width="30%">[{$vo.attr_name}]</td>
+                                <td align="left" bgcolor="#FFFFFF" width="70%">{$vo.attr_value}</td>
                             </tr>
-                            <tr>
-                                <td class="f1" align="left" bgcolor="#FFFFFF" width="30%">[袖型]</td>
-                                <td align="left" bgcolor="#FFFFFF" width="70%">短袖</td>
-                            </tr>
-                            <tr>
-                                <td class="f1" align="left" bgcolor="#FFFFFF" width="30%">[风格]</td>
-                                <td align="left" bgcolor="#FFFFFF" width="70%">日韩</td>
-                            </tr>
+                            {/volist}
                             </tbody>
                         </table>
                     </blockquote>

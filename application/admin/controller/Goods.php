@@ -306,9 +306,9 @@ class Goods extends Common
             if($info){
                 $filename = $info->getSaveName();
                 $image = Image::open($dir.$filename);
-                $image->thumb(360,360)->save($dir.'max_'.$filename);
+                $image->thumb(350,350)->save($dir.'max_'.$filename);
                 $image->thumb(222,222)->save($dir.'mid_'.$filename);
-                $image->thumb(67,67)->save($dir.'sm_'.$filename);
+                $image->thumb(56,56)->save($dir.'sm_'.$filename);
                 $data = [
                     'original' => $dir.$filename,
                     'max_thumb' => $dir.'max_'.$filename,
@@ -334,8 +334,8 @@ class Goods extends Common
             if($info){
                 $filename = $info->getSaveName();
                 $image = Image::open($dir.$filename);
-                $image->thumb(360,360)->save($dir.'max_'.$filename);
-                $image->thumb(67,67)->save($dir.'sm_'.$filename);
+                $image->thumb(350,350)->save($dir.'max_'.$filename);
+                $image->thumb(56,56)->save($dir.'sm_'.$filename);
                 $data[] = [
                     'original' => $dir.$filename,
                     'max_thumb' => $dir.'max_'.$filename,

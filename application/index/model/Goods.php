@@ -17,4 +17,5 @@ class Goods extends Model
         $data = $this->where(['id'=>['in',$arr]])->select();
         return $data;
     }
+
 }
