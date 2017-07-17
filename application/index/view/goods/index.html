@@ -165,7 +165,8 @@
             </div>
 
             <div class="textInfo">
-                <form action="javascript:addToCart(140)" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+                <form action="{:url('flow/addToCar')}" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+                    <input type="hidden" name="goods_id" value="{$data.id}" />
                     <h1 class="clearfix">{$data.goods_name} </h1>
 
                     <ul class="ul2 clearfix">
@@ -231,15 +232,15 @@
                             <strong>{$vo[0]['attr_name']}：</strong>
                             {volist name="vo" id="vo2"}
                             {if condition="$key eq 0"}
-                            <label style="margin-right: 10px;"><input checked name="attr[{$vo2.attr_id}]" value="" type="radio">{$vo2.attr_value}
+                            <label style="margin-right: 10px;"><input checked name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
                                 {if condition="$vo2.attr_price neq 0"}
-                                <font color="red">[+{$vo2.attr_price}元]</font>
+                                <font color="red">[+{$vo2.attr_price}]</font>
                                 {/if}
                             </label>
                             {else/}
-                            <label style="margin-right: 10px;"><input name="attr[{$vo2.attr_id}]" value="" type="radio">{$vo2.attr_value}
+                            <label style="margin-right: 10px;"><input name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
                                 {if condition="$vo2.attr_price neq 0"}
-                                <font color="red">[+{$vo2.attr_price}元]</font>
+                                <font color="red">[+{$vo2.attr_price}]</font>
                                 {/if}
                             </label>
                             {/if}
@@ -250,15 +251,16 @@
                         <li class="clearfix">
                             <dd>
                                 <strong>购买数量：</strong>
-                                <input name="number" id="number" value="1" size="4" onblur="changePrice()"
-                                       style="border:1px solid #ccc; " type="text"> <strong>商品总价：</strong><font
-                                    id="ECS_GOODS_AMOUNT" class="f1">110元</font>
+                                <font onclick="delNum(this)" style="border: 1px solid #ccc; padding: 1px 6px; cursor:pointer;">-</font>
+                                <input onchange="sumPrice(this)" name="number" id="number" value="1" size="4" style="border:1px solid #ccc; " type="text">
+                                <font onclick="addNum(this)" style="border: 1px solid #ccc; padding: 1px 5px; cursor:pointer;">+</font>
+                                <strong>商品总价：</strong><font id="sum_price" class="f1">{$data.shop_price}</font>元
                             </dd>
                         </li>
 
                         <li class="padd">
-                            <a href="javascript:addToCart(140)"><img src="/static/images/goumai2.gif"></a>
-
+                            <!--<a href="javascript:addToCart(140)"><img src="/static/images/goumai2.gif"></a>-->
+                            <input type="submit" value="加入购物车"/>
                         </li>
 
                     </ul>
@@ -670,55 +672,28 @@
     }
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?d7e112eaeea65921aeaadcc0af8f2853";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+//商品数量加减
 <script type="text/javascript">
-    var goods_id = 140;
-    var goodsattr_style = 1;
-    var gmt_end_time = 1664611200;
-    var day = "天";
-    var hour = "小时";
-    var minute = "分钟";
-    var second = "秒";
-    var end = "结束";
-    var goodsId = 140;
-    var now_time = 1466230891;
-    onload = function () {
-        changePrice();
-        fixpng();
-        try {
-            onload_leftTime();
-        }
-        catch (e) {
+    function delNum(o){
+        var input = $(o).next();
+        var num = input.val();
+        if(num > 1){
+            num = parseInt(num) - 1;
+            input.val(num);
+        }else{
+            alert('商品数量至少1个');
         }
     }
-    /**
-     * 点选可选属性或改变数量时修改商品价格的函数
-     */
-    function changePrice() {
-        var attr = getSelectedAttributes(document.forms['ECS_FORMBUY']);
-        var qty = document.forms['ECS_FORMBUY'].elements['number'].value;
-        Ajax.call('goods.php', 'act=price&id=' + goodsId + '&attr=' + attr + '&number=' + qty, changePriceResponse, 'GET', 'JSON');
+    function addNum(o){
+        var input = $(o).prev();
+        var num = input.val();
+        num = parseInt(num) + 1;
+        input.val(num);
     }
-    /**
-     * 接收返回的信息
-     */
-    function changePriceResponse(res) {
-        if (res.err_msg.length > 0) {
-            alert(res.err_msg);
-        }
-        else {
-            document.forms['ECS_FORMBUY'].elements['number'].value = res.qty;
-            if (document.getElementById('ECS_GOODS_AMOUNT'))
-                document.getElementById('ECS_GOODS_AMOUNT').innerHTML = res.result;
-        }
+    function sumPrice(o){
+        var price = {$data.shop_price};
+        var num = $(o).val();
+        $('#sum_price').text(parseInt(price) * parseInt(num));
     }
 </script>
 
