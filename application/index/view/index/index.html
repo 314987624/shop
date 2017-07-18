@@ -198,12 +198,12 @@
                 {volist name="cheapgoods" id="vo"}
                 <ul class="clearfix">
                     <li class="goodsimg">
-                        <a href="#">
+                        <a href="{:url('goods/index',['id'=>$vo.id])}">
                             <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="B_blue" border="0">
                         </a>
                     </li>
                     <li>
-                        <p><a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a></p>
+                        <p><a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}">{$vo.goods_name}</a></p>
                         促销价：<font class="f1">{$vo.shop_price}元</font>
                     </li>
                 </ul>
@@ -222,10 +222,10 @@
             <div id="show_new_area" class="clearfix">
                 {volist name="newgoods" id="vo"}
                 <div class="goodsItem">
-                    <a href="#">
+                    <a href="{:url('goods/index',['id'=>$vo.id])}">
                         <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
                     <p class="f1">
-                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                        <a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}">{$vo.goods_name}</a>
                     </p>
                     市场价：<font class="market">{$vo.market_price}元</font><br>
                     本店价：<font class="f1">{$vo.shop_price}元</font>
@@ -239,10 +239,10 @@
             <div id="show_hot_area" class="clearfix">
                 {volist name="hotgoods" id="vo"}
                 <div class="goodsItem">
-                    <a href="#">
+                    <a href="{:url('goods/index',['id'=>$vo.id])}">
                         <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
                     <p class="f1">
-                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                        <a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}">{$vo.goods_name}</a>
                     </p>
                     市场价：<font class="market">{$vo.market_price}元</font><br>
                     本店价：<font class="f1">{$vo.shop_price}元</font>
@@ -256,10 +256,10 @@
             <div id="show_best_area" class="clearfix">
                 {volist name="bestgoods" id="vo"}
                 <div class="goodsItem">
-                    <a href="#">
+                    <a href="{:url('goods/index',['id'=>$vo.id])}">
                         <img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
                     <p class="f1">
-                        <a href="#" title="{$vo.goods_name}">{$vo.goods_name}</a>
+                        <a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}">{$vo.goods_name}</a>
                     </p>
                     市场价：<font class="market">{$vo.market_price}元</font><br>
                     本店价：<font class="f1">{$vo.shop_price}元</font>

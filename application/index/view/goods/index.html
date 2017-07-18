@@ -680,6 +680,8 @@
         if(num > 1){
             num = parseInt(num) - 1;
             input.val(num);
+            var price = {$data.shop_price};
+            $('#sum_price').text(parseInt(price) * parseInt(num));
         }else{
             alert('商品数量至少1个');
         }
@@ -689,6 +691,8 @@
         var num = input.val();
         num = parseInt(num) + 1;
         input.val(num);
+        var price = {$data.shop_price};
+        $('#sum_price').text(parseInt(price) * parseInt(num));
     }
     function sumPrice(o){
         var price = {$data.shop_price};

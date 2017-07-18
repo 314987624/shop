@@ -16,19 +16,17 @@ class Car extends Model
         cookie('car',serialize($car),$time);
     }
 
-    public function updateCar($goodsId,$attrId,$goodsNum)
+    public function updateCar($key,$goodsNum)
     {
         $car = unserialize($_COOKIE['car']);
-        $key = $goodsId.'-'.$attrId;
         $car[$key] = $goodsNum;
         $time = 3600 * 24 * 7;
         cookie('car',serialize($car),$time);
     }
 
-    public function delGoods($goodsId,$attrId)
+    public function delGoods($key)
     {
         $car = unserialize($_COOKIE['car']);
-        $key = $goodsId.'-'.$attrId;
         unset($car[$key]);
         $time = 3600 * 24 * 7;
         cookie('car',serialize($car),$time);
@@ -36,6 +34,9 @@ class Car extends Model
 
     public function getGoodsInfo()
     {
+        if(!cookie('?car')){
+            return null;
+        }
         $car = unserialize($_COOKIE['car']);
         $goodsInfo = [];
         foreach($car as $k => $v){
@@ -52,6 +53,7 @@ class Car extends Model
                 ->field('a.attr_name,g.attr_value,g.attr_price')
                 ->where($map)->select();
             $attr_price = 0;
+            $attrs = [];
             foreach($attr as $v1) {
                 if($v1['attr_price'] == 0){
                     $attrs[] = $v1['attr_name'].':'.$v1['attr_value'];

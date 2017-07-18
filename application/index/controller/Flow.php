@@ -17,9 +17,38 @@ class Flow extends Common
     public function flow1()
     {
         $car = new Car();
-        $goodsInfo = $car->getGoodsInfo();
-        //halt($goodsInfo);
+        $goodsInfo = $car->getGoodsInfo();;
         $this->assign('goodsInfo',$goodsInfo);
         return $this->fetch();
+    }
+
+    public function ajaxDelGoods($key)
+    {
+        if(request()->isAjax()){
+            $car = new Car();
+            $car->delGoods($key);
+        }else{
+            $this->error('非法操作');
+        }
+    }
+
+    public function ajaxUpdateCar($key,$num)
+    {
+        if(request()->isAjax()){
+            $car = new Car();
+            $car->updateCar($key,$num);
+        }else{
+            $this->error('非法操作');
+        }
+    }
+
+    public function ajaxClearCar()
+    {
+        if(request()->isAjax()){
+            $car = new Car();
+            $car->clearCar();
+        }else{
+            $this->error('非法操作');
+        }
     }
 }

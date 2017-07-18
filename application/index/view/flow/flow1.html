@@ -47,7 +47,7 @@
                 <?php $sum = 0; $m_sum = 0;?>
                 {volist name="goodsInfo" id="vo"}
                 <?php $sum += $vo['price']*$vo['number']; $m_sum += $vo['market_price']*$vo['number']?>
-                <tr goods_id="2" goods_attr_ids="222">
+                <tr key = "{$key}">
                     <td bgcolor="#ffffff" align="center" style="width:300px;">
                         <a href="goods.php?id=1" target="_blank">
                             <img style="width:80px; height:80px;" src="/{$vo.mid_thumb}" border="0" title="{$vo.goods_name}"/></a><br/>
@@ -59,13 +59,13 @@
                     <td align="center" marketPrice="" bgcolor="#ffffff">￥{$vo.market_price}元</td>
                     <td align="center" shopPrice="" bgcolor="#ffffff">￥{$vo.shop_price}元</td>
                     <td align="center" bgcolor="#ffffff">
-                        <span onclick="delnum(this);" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">-</span>
-                        <input type="text" readonly="readonly" name="goods_number[4]" id="goods_number_4" value="{$vo.number}" size="4" class="inputBg" style="text-align:center " onkeydown="showdiv(this)"/>
-                        <span onclick="addnum(this);" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">+</span>
+                        <span onclick="delnum(this,{$vo.price},{$vo.market_price});" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">-</span>
+                        <input type="text" readonly="readonly" value="{$vo.number}" size="4" class="inputBg" style="text-align:center"/>
+                        <span onclick="addnum(this,{$vo.price},{$vo.market_price});" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">+</span>
                     </td>
                     <td align="center" bgcolor="#ffffff">￥<?php echo $vo['price']*$vo['number']?>元</td>
                     <td align="center" bgcolor="#ffffff">
-                        <a href="javascript:;" onclick="deltr(this);" class="f6">删除</a>
+                        <a href="javascript:;" onclick="deltr(this,{$vo.price},{$vo.market_price});" class="f6">删除</a>
                     </td>
                 </tr>
                 {/volist}
@@ -92,107 +92,72 @@
                     $("#xjje").text(0);
                     $("#scje").text(0);
                     $("#jsje").text(0);
-                    $.get("__CONTROLLER__/clearCart");
+                    $.get("ajaxClearCar");
                 }
-
-
             }
-            function delnum(o) {
+
+            function delnum(o,price,mprice) {
                 var input = $(o).next();
                 var num = input.val();
                 var xjje = $("#xjje").html();
                 var scje = $("#scje").html();
-                var tjsje = $("#jsje").html();
-                var tr = $(o).parent().parent();
-                var gi = tr.attr("goods_id");
-                var gattr = tr.attr("goods_attr_ids");
+                var jsje = $("#jsje").html();
+                var nxjje = parseInt(xjje) - parseInt(price);
+                var nscje = parseInt(scje) - parseInt(mprice);
                 if (num > 1) {
                     num = parseInt(num) - 1;
-                    //ajax获取当前货品库存量
-                    getgoodsnum(gi, gattr, num);
                     input.val(num);
-                    var mprice = $(o).parent().prev().attr('mprice');
-                    var mktprice = $(o).parent().prev().prev().attr('mktprice');
-                    var xj = parseInt(num) * mprice;
-                    xj = '￥' + xj + '元';
-                    $(o).parent().next().html(xj);
-                    xjje = parseInt(xjje) - parseInt(mprice);
-                    scje = parseInt(scje) - parseInt(mktprice);
-                    var jsje = parseInt(mktprice) - parseInt(mprice);
-                    tjsje = parseInt(tjsje) - parseInt(jsje);
-                    $("#xjje").html(xjje);
-                    $("#scje").html(scje);
-                    $("#jsje").html(tjsje);
+                    input.parent().next().text('￥'+parseInt(price)*num+'元');
+                    $("#xjje").html(nxjje);
+                    $("#scje").html(nscje);
+                    $("#jsje").html(nscje - nxjje);
+                    var key = $(o).parent().parent().attr('key');
+                    $.get('ajaxUpdateCar/key/' + key + '/num/' + num);
                 } else {
                     alert('购买数量必须大于1！');
                     return false;
                 }
-                ajaxupdategn(gi, gattr, num);
             }
 
-            function addnum(o) {
+            function addnum(o,price,mprice) {
                 var input = $(o).prev();
                 var num = input.val();
                 var xjje = $("#xjje").html();
                 var scje = $("#scje").html();
-                var tjsje = $("#jsje").html();
-                var tr = $(o).parent().parent();
-                var gi = tr.attr("goods_id");
-                var gattr = tr.attr("goods_attr_ids");
+                var jsje = $("#jsje").html();
+                var nxjje = parseInt(xjje) + parseInt(price);
+                var nscje = parseInt(scje) + parseInt(mprice);
                 num = parseInt(num) + 1;
-                //ajax获取当前货品库存量
-                getgoodsnum(gi, gattr, num);
                 input.val(num);
-                var mprice = $(o).parent().prev().attr('mprice');
-                var mktprice = $(o).parent().prev().prev().attr('mktprice');
-                xjje = parseInt(xjje) + parseInt(mprice);
-                scje = parseInt(scje) + parseInt(mktprice);
-                var jsje = parseInt(mktprice) - parseInt(mprice);
-                tjsje = parseInt(tjsje) + parseInt(jsje);
-                $("#jsje").html(tjsje);
-                $("#xjje").html(xjje);
-                $("#scje").html(scje);
-                var xj = parseInt(num) * mprice;
-                xj = '￥' + xj + '元';
-                $(o).parent().next().html(xj);
-                ajaxupdategn(gi, gattr, num);
+                input.parent().next().text('￥'+parseInt(price)*num+'元');
+                $("#xjje").html(nxjje);
+                $("#scje").html(nscje);
+                $("#jsje").html(nscje - nxjje);
+                var key = $(o).parent().parent().attr('key');
+                $.get('ajaxUpdateCar/key/' + key + '/num/' + num);
             }
 
-            function deltr(o) {
+            function deltr(o,price,mprice) {
                 if (!confirm('确定要删除该商品吗？')) {
                     return false;
                 }
+                var tr = $(o).parent().parent();
+                var num = tr.find('input').val();
+                price = parseInt(price) * parseInt(num);
+                mprice = parseInt(mprice) * parseInt(num);
                 var xjje = $("#xjje").html();
                 var scje = $("#scje").html();
-                var tjsje = $("#jsje").html();
-                var input = $(o).parent().prev().prev().find('input');
-                var num = input.val();
-                var mprice = $(o).parent().prev().prev().prev().attr('mprice');
-                var mktprice = $(o).parent().prev().prev().prev().prev().attr('mktprice');
-                var _tmprice = parseInt(mprice) * parseInt(num);
-                var _tmktprice = parseInt(mktprice) * parseInt(num);
-                var _tjs = (parseInt(mktprice) - parseInt(mprice)) * parseInt(num);
-                var tr = $(o).parent().parent();
-                var gi = tr.attr("goods_id");
-                var gattr = tr.attr("goods_attr_ids");
-                xjje = parseInt(xjje) - parseInt(_tmprice);
-                $("#xjje").html(xjje);
-                scje = parseInt(scje) - parseInt(_tmktprice);
-                $("#scje").html(scje);
-                tjsje = parseInt(tjsje) - parseInt(_tjs);
-                $("#jsje").html(tjsje);
-                $(o).parent().parent().remove();
-                ajaxupdategn(gi, gattr, 0);
+                var jsje = $("#jsje").html();
+                var nxjje = parseInt(xjje) - parseInt(price);
+                var nscje = parseInt(scje) - parseInt(mprice);
+                $("#xjje").html(nxjje);
+                $("#scje").html(nscje);
+                $("#jsje").html(nscje - nxjje);
+                var key = tr.attr('key');
+                $.get('ajaxDelGoods/key/' + key);
+                tr.remove();
             }
 
-            function ajaxupdategn(gi, gattr, num) {
-                if (gattr == "") {
-                    $.get("__CONTROLLER__/ajaxupdateGN/gi/" + gi + "/gn/" + num);
-                } else {
-                    $.get("__CONTROLLER__/ajaxupdateGN/gi/" + gi + "/gattr/" + gattr + "/gn/" + num);
-                }
-
-            }
 
             //ajax获取商品库存量
             function getgoodsnum(gid, gaid, num) {
@@ -220,10 +185,16 @@
         </script>
         <table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
             <tr>
-                <td bgcolor="#ffffff"><a target="_blank" href="__APP__"><img src="/static/images/continue.gif"
-                                                                             alt="continue"/></a></td>
-                <td bgcolor="#ffffff" align="right"><a id="jszx" href="__CONTROLLER__/flow2"><img
-                        src="/static/images/checkout.gif" alt="checkout"/></a></td>
+                <td bgcolor="#ffffff">
+                    <a href="{:url('index/index')}">
+                        <img src="/static/images/continue.gif" alt="continue"/>
+                    </a>
+                </td>
+                <td bgcolor="#ffffff" align="right">
+                    <a id="jszx" href="{:url('flow2')}">
+                        <img src="/static/images/checkout.gif" alt="checkout"/>
+                    </a>
+                </td>
             </tr>
         </table>
 
