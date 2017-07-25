@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-14 18:18:29
+-- Generation Time: 2017-07-25 13:46:33
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `goods` (
   PRIMARY KEY (`id`),
   KEY `cate_id` (`cate_id`,`brand_id`,`type_id`),
   KEY `shop_price` (`shop_price`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- 转存表中的数据 `goods`
@@ -338,7 +338,8 @@ INSERT INTO `goods` (`id`, `goods_name`, `goods_sn`, `original`, `sm_thumb`, `mi
 (16, '男毛衫', '1499922741333197', './uploads/goods/29743149994923131292.jpg', './uploads/goods/sm_29743149994923131292.jpg', './uploads/goods/mid_29743149994923131292.jpg', './uploads/goods/max_29743149994923131292.jpg', '222.00', '111.00', 1, 19, 7, 4, '', '22.00', 0),
 (17, '型男服装', '1499922817280110', './uploads/goods/2868114999492188718.jpg', './uploads/goods/sm_2868114999492188718.jpg', './uploads/goods/mid_2868114999492188718.jpg', './uploads/goods/max_2868114999492188718.jpg', '222.00', '221.00', 1, 29, 2, 4, '', '21.00', 0),
 (18, '美女短裤', '1499922906143581', './uploads/goods/2006514999491427558.jpg', './uploads/goods/sm_2006514999491427558.jpg', './uploads/goods/mid_2006514999491427558.jpg', './uploads/goods/max_2006514999491427558.jpg', '222.00', '211.00', 1, 43, 2, 4, '', '11.00', 0),
-(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p>11</p>', '11.00', 0);
+(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p>11</p>', '11.00', 0),
+(20, '美女服饰', '1500186108882269', './uploads/goods/13918150018610831295.jpg', './uploads/goods/sm_13918150018610831295.jpg', './uploads/goods/mid_13918150018610831295.jpg', './uploads/goods/max_13918150018610831295.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p><br/></p><p><br/><img alt="" id="a89a52c365c84d00b5d382b7b8d75e78 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t5434/124/94368989/242488/4016ef80/58f8874fNe68bf2cf.jpg"/><img alt="" id="3ac873f99b114250b08e3aac61697076 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t4945/229/1755173706/428637/699a5cf8/58f470aaNf01df63f.jpg"/></p>', '11.00', 0);
 
 -- --------------------------------------------------------
 
@@ -353,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `goods_attr` (
   `attr_value` varchar(150) NOT NULL COMMENT '属性值',
   `attr_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '属性价格',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=152 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=163 ;
 
 --
 -- 转存表中的数据 `goods_attr`
@@ -445,7 +446,18 @@ INSERT INTO `goods_attr` (`id`, `goods_id`, `attr_id`, `attr_value`, `attr_price
 (148, 19, 21, '潮流', '0.00'),
 (149, 19, 22, '薄款', '0.00'),
 (150, 19, 23, '18-24岁', '0.00'),
-(151, 19, 17, '白色', '0.00');
+(151, 19, 17, '白色', '0.00'),
+(152, 20, 18, 'M', '11.00'),
+(153, 20, 18, 'ML', '22.00'),
+(154, 20, 18, 'XML', '33.00'),
+(155, 20, 19, '布料', '0.00'),
+(156, 20, 20, '精品', '0.00'),
+(157, 20, 21, '潮流', '0.00'),
+(158, 20, 22, '薄款', '0.00'),
+(159, 20, 23, '18-24岁', '0.00'),
+(160, 20, 17, '黑色', '11.00'),
+(161, 20, 17, '白色', '22.00'),
+(162, 20, 17, '红色', '33.00');
 
 -- --------------------------------------------------------
 
@@ -460,14 +472,19 @@ CREATE TABLE IF NOT EXISTS `goods_pic` (
   `sm_thumb` varchar(100) NOT NULL COMMENT '小缩略图',
   `max_thumb` varchar(100) NOT NULL COMMENT '大缩略图',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
 
 --
 -- 转存表中的数据 `goods_pic`
 --
 
 INSERT INTO `goods_pic` (`id`, `goods_id`, `original`, `sm_thumb`, `max_thumb`) VALUES
-(17, 9, './uploads/goods/534314999217201324.jpg', './uploads/goods/sm_534314999217201324.jpg', './uploads/goods/max_534314999217201324.jpg');
+(17, 9, './uploads/goods/534314999217201324.jpg', './uploads/goods/sm_534314999217201324.jpg', './uploads/goods/max_534314999217201324.jpg'),
+(18, 20, './uploads/goods/8277150018610823146.jpg', './uploads/goods/sm_8277150018610823146.jpg', './uploads/goods/max_8277150018610823146.jpg'),
+(19, 20, './uploads/goods/31579150018610828664.jpg', './uploads/goods/sm_31579150018610828664.jpg', './uploads/goods/max_31579150018610828664.jpg'),
+(20, 20, './uploads/goods/27857150018610813110.jpg', './uploads/goods/sm_27857150018610813110.jpg', './uploads/goods/max_27857150018610813110.jpg'),
+(21, 20, './uploads/goods/2923915001861085028.jpg', './uploads/goods/sm_2923915001861085028.jpg', './uploads/goods/max_2923915001861085028.jpg'),
+(22, 20, './uploads/goods/1293150018610819650.jpg', './uploads/goods/sm_1293150018610819650.jpg', './uploads/goods/max_1293150018610819650.jpg');
 
 -- --------------------------------------------------------
 
@@ -505,16 +522,14 @@ CREATE TABLE IF NOT EXISTS `member` (
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别:0保密1男2女',
   `regtime` int(10) unsigned NOT NULL COMMENT '注册时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `member`
 --
 
 INSERT INTO `member` (`id`, `username`, `password`, `email`, `check_mail`, `mail_str`, `sex`, `regtime`) VALUES
-(1, 'xiexie', '123123', '448408740@qq.com', 0, 'fb5d05878e9dc36461541e3b0eca9789', 0, 0),
-(2, 'xiexie2', '123123', '448408740@qq.com', 0, 'd1dd386714c9e23786daf25dc8d5c9a0', 0, 1500038934),
-(3, 'xiexie3', '123123', '448408740@qq.com', 1, '', 0, 1500039068);
+(5, 'xiexie', '4297f44b13955235245b2497399d7a93', '448408740@qq.com', 0, '2f09a0ebdd1532967d9dee022df370c0', 0, 1500110736);
 
 -- --------------------------------------------------------
 
@@ -536,7 +551,7 @@ CREATE TABLE IF NOT EXISTS `member_level` (
 --
 
 INSERT INTO `member_level` (`id`, `level_name`, `points_min`, `points_max`, `rate`) VALUES
-(1, '普通会员', 0, 10000, 100),
+(1, '注册用户', 0, 10000, 100),
 (2, '中级会员', 0, 2000, 90),
 (3, '高级会员', 0, 3000, 80),
 (4, 'VIP会员', 0, 4000, 70);
@@ -553,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `member_price` (
   `level_id` mediumint(8) unsigned NOT NULL COMMENT '等级ID',
   `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=85 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=89 ;
 
 --
 -- 转存表中的数据 `member_price`
@@ -603,7 +618,11 @@ INSERT INTO `member_price` (`id`, `price`, `level_id`, `goods_id`) VALUES
 (81, '0.00', 1, 19),
 (82, '0.00', 2, 19),
 (83, '0.00', 3, 19),
-(84, '0.00', 4, 19);
+(84, '0.00', 4, 19),
+(85, '0.00', 1, 20),
+(86, '0.00', 2, 20),
+(87, '0.00', 3, 20),
+(88, '0.00', 4, 20);
 
 -- --------------------------------------------------------
 
@@ -645,6 +664,73 @@ INSERT INTO `nav` (`id`, `nav_name`, `nav_url`, `nav_blank`, `nav_pos`) VALUES
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `order`
+--
+
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '订单ID',
+  `sn` char(16) NOT NULL COMMENT '订单编号',
+  `addtime` int(11) NOT NULL COMMENT '下单时间',
+  `shr` varchar(30) NOT NULL COMMENT '收货人',
+  `province` varchar(30) NOT NULL COMMENT '省',
+  `city` varchar(30) NOT NULL COMMENT '市',
+  `county` varchar(60) NOT NULL COMMENT '县',
+  `adress` varchar(255) NOT NULL COMMENT '详细地址',
+  `phone` varchar(11) NOT NULL COMMENT '电话',
+  `mid` mediumint(8) unsigned NOT NULL COMMENT '会员ID',
+  `peisong` varchar(30) NOT NULL COMMENT '配送方式',
+  `pay` varchar(30) NOT NULL COMMENT '支付方式',
+  `gtprice` decimal(10,2) NOT NULL COMMENT '商品总价',
+  `yprice` decimal(10,2) NOT NULL COMMENT '运费价格',
+  `tprice` decimal(10,2) NOT NULL COMMENT '订单总价',
+  `order_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未确认，1以确认，2申请退货，3退货成功',
+  `pay_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未支付，1已支付',
+  `fh_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未发货，1已发货，2已收货',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `order`
+--
+
+INSERT INTO `order` (`id`, `sn`, `addtime`, `shr`, `province`, `city`, `county`, `adress`, `phone`, `mid`, `peisong`, `pay`, `gtprice`, `yprice`, `tprice`, `order_status`, `pay_status`, `fh_status`) VALUES
+(1, '', 0, '小米', '湖北省', '地级市', '市、县级市', '信息信息', '13455554444', 0, '顺丰', '支付宝', '763.00', '0.00', '0.00', 0, 0, 0),
+(2, '1500882563302544', 1500882563, '小红', '安徽省', '亳州市', '城关镇', '小红的家', '13455556666', 5, '申通', '余额', '763.00', '0.00', '0.00', 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `order_goods`
+--
+
+CREATE TABLE IF NOT EXISTS `order_goods` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `goods_id` mediumint(8) unsigned NOT NULL COMMENT '商品ID',
+  `goods_name` varchar(150) NOT NULL COMMENT '商品名称',
+  `goods_attr_id` varchar(60) NOT NULL COMMENT '属性ID',
+  `goods_attr_str` varchar(150) NOT NULL COMMENT '属性字符串',
+  `goods_price` decimal(10,2) unsigned NOT NULL COMMENT '本店价格',
+  `goods_marketprice` decimal(10,2) unsigned NOT NULL COMMENT '市场价格',
+  `goods_num` smallint(5) unsigned NOT NULL COMMENT '商品数量',
+  `order_id` mediumint(8) unsigned NOT NULL COMMENT '订单ID',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `order_goods`
+--
+
+INSERT INTO `order_goods` (`id`, `goods_id`, `goods_name`, `goods_attr_id`, `goods_attr_str`, `goods_price`, `goods_marketprice`, `goods_num`, `order_id`) VALUES
+(1, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 2, 1),
+(2, 19, '大气时尚女装', '145,151', '尺码:M<br/>颜色:白色', '111.00', '222.00', 1, 1),
+(3, 12, '美女短裙', '96,102', '尺码:M<br/>颜色:黑色', '222.00', '233.00', 1, 1),
+(4, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 2, 2),
+(5, 19, '大气时尚女装', '145,151', '尺码:M<br/>颜色:白色', '111.00', '222.00', 1, 2),
+(6, 12, '美女短裙', '96,102', '尺码:M<br/>颜色:黑色', '222.00', '233.00', 1, 2);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `product`
 --
 
@@ -654,21 +740,17 @@ CREATE TABLE IF NOT EXISTS `product` (
   `goods_number` mediumint(8) unsigned NOT NULL COMMENT '库存数量',
   `goods_attr` varchar(150) NOT NULL COMMENT '库存属性',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=44 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- 转存表中的数据 `product`
 --
 
 INSERT INTO `product` (`id`, `goods_id`, `goods_number`, `goods_attr`) VALUES
-(41, 1, 222, '31,36'),
-(40, 1, 100, '30,37'),
-(39, 1, 40, '30,35'),
-(38, 1, 200, '32,35'),
-(37, 1, 243, '32,36'),
-(36, 1, 45, '30,36'),
-(42, 1, 80, '31,35'),
-(43, 3, 23, '47,53');
+(48, 19, 3, '145,151'),
+(47, 20, 44, '154,161'),
+(46, 20, 44, '153,161'),
+(45, 20, 33, '152,160');
 
 -- --------------------------------------------------------
 
@@ -721,6 +803,7 @@ INSERT INTO `recvalue` (`valueid`, `recid`, `rectype`) VALUES
 (10, 7, 1),
 (13, 7, 1),
 (13, 3, 1),
+(20, 2, 1),
 (14, 4, 1),
 (14, 2, 1),
 (11, 3, 1),
@@ -737,6 +820,24 @@ INSERT INTO `recvalue` (`valueid`, `recid`, `rectype`) VALUES
 (13, 2, 1),
 (10, 2, 1),
 (9, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `shrinfo`
+--
+
+CREATE TABLE IF NOT EXISTS `shrinfo` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `shr` varchar(30) NOT NULL COMMENT '姓名',
+  `province` varchar(50) NOT NULL COMMENT '省',
+  `city` varchar(50) NOT NULL COMMENT '市',
+  `county` varchar(60) NOT NULL COMMENT '县',
+  `adress` varchar(255) NOT NULL COMMENT '详细地址',
+  `phone` varchar(11) NOT NULL COMMENT '联系电话',
+  `mid` mediumint(8) unsigned NOT NULL COMMENT '会员ID',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

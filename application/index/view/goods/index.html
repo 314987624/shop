@@ -186,9 +186,8 @@
                         </li>
                         <li class="clearfix">
                             <dd>
-
                                 <strong>商品库存：</strong>
-                                99
+                                <font id="sum_product"></font>
                             </dd>
                         </li>
                         <li class="clearfix">
@@ -232,13 +231,13 @@
                             <strong>{$vo[0]['attr_name']}：</strong>
                             {volist name="vo" id="vo2"}
                             {if condition="$key eq 0"}
-                            <label style="margin-right: 10px;"><input checked name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
+                            <label style="margin-right: 10px;"><input class="attr" onclick="getProduct()" checked name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
                                 {if condition="$vo2.attr_price neq 0"}
                                 <font color="red">[+{$vo2.attr_price}]</font>
                                 {/if}
                             </label>
                             {else/}
-                            <label style="margin-right: 10px;"><input name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
+                            <label style="margin-right: 10px;"><input class="attr" onclick="getProduct()" name="attr[{$vo2.attr_id}]" value="{$vo2.id}" type="radio">{$vo2.attr_value}
                                 {if condition="$vo2.attr_price neq 0"}
                                 <font color="red">[+{$vo2.attr_price}]</font>
                                 {/if}
@@ -254,13 +253,14 @@
                                 <font onclick="delNum(this)" style="border: 1px solid #ccc; padding: 1px 6px; cursor:pointer;">-</font>
                                 <input onchange="sumPrice(this)" name="number" id="number" value="1" size="4" style="border:1px solid #ccc; " type="text">
                                 <font onclick="addNum(this)" style="border: 1px solid #ccc; padding: 1px 5px; cursor:pointer;">+</font>
-                                <strong>商品总价：</strong><font id="sum_price" class="f1">{$data.shop_price}</font>元
+                                <strong>商品总价：</strong><font id="sum_price" class="f1">{$data.shop_price}</font>元/
+                                <strong>库存状态：</strong><font id="product" class="f1"></font>
                             </dd>
                         </li>
 
                         <li class="padd">
                             <!--<a href="javascript:addToCart(140)"><img src="/static/images/goumai2.gif"></a>-->
-                            <input type="submit" value="加入购物车"/>
+                            <input id="submit" type="submit" value="加入购物车"/>
                         </li>
 
                     </ul>
@@ -682,6 +682,7 @@
             input.val(num);
             var price = {$data.shop_price};
             $('#sum_price').text(parseInt(price) * parseInt(num));
+            getProduct();
         }else{
             alert('商品数量至少1个');
         }
@@ -693,12 +694,54 @@
         input.val(num);
         var price = {$data.shop_price};
         $('#sum_price').text(parseInt(price) * parseInt(num));
+        getProduct();
     }
     function sumPrice(o){
         var price = {$data.shop_price};
         var num = $(o).val();
         $('#sum_price').text(parseInt(price) * parseInt(num));
+        getProduct();
     }
+    $(function(){
+        $.ajax({
+            type:'get',
+            url:"{:url('ajaxSumProduct',['goods_id'=>$data.id])}",
+            dataType:'json',
+            success:function(data){
+                $('#sum_product').text(data.sum);
+            }
+        });
+    });
+    function getProduct(){
+        var attr = [];
+        $('.attr').each(function(){
+            if(this.checked){
+                attr.push(this.value);
+            }
+        });
+        attr.sort();
+        if(attr == ''){
+            var url = "{:url('ajaxGetProduct',['goods_id'=>$data.id])}";
+        }else{
+            var url = "{:url('ajaxGetProduct',['goods_id'=>$data.id])}?goods_attr=" + attr;
+        }
+        var num = $('#number').val();
+        $.ajax({
+            type:'get',
+            url:url,
+            dataType:'json',
+            success:function(data){
+                if(data.num >= num){
+                    $('#product').text('有货['+data.num+']');
+                    $('#submit').removeAttr('disabled');
+                }else{
+                    $('#product').text('货品数量不足');
+                    $('#submit').attr('disabled',true);
+                }
+            }
+        });
+    }
+    getProduct();
 </script>
 
 <img src="/static/images/controlbar.htm" style="position: absolute; top: -999px;"><img

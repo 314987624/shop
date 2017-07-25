@@ -244,6 +244,7 @@ class Goods extends Common
             }
             Db::table('goods_pic')->where('goods_id',$id)->delete();
             Db::table('recvalue')->where(['valueid'=>$id,'rectype'=>1])->delete();
+            Db::table('product')->where('goods_id',$id)->delete();
             $ret = Db::table('goods')->delete($id);
             if($ret){
                 $this->success('删除成功');
@@ -269,6 +270,7 @@ class Goods extends Common
                     }
                     $attr[] = $v2[$k];
                 }
+                sort($attr);
                 $attr = implode(',',$attr);
                 $data[] = [
                     'goods_id' => $goods_id,

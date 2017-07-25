@@ -7,7 +7,7 @@
     <meta name="Keywords" content=""/>
     <meta name="Description" content=""/>
 
-    <title>购物流程_ECSHOP演示站 - Powered by ECShop</title>
+    <title>购物车</title>
 
     <link rel="shortcut icon" href="favicon.ico"/>
     <link rel="icon" href="animated_favicon.gif" type="image/gif"/>
@@ -60,7 +60,7 @@
                     <td align="center" shopPrice="" bgcolor="#ffffff">￥{$vo.shop_price}元</td>
                     <td align="center" bgcolor="#ffffff">
                         <span onclick="delnum(this,{$vo.price},{$vo.market_price});" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">-</span>
-                        <input type="text" readonly="readonly" value="{$vo.number}" size="4" class="inputBg" style="text-align:center"/>
+                        <input class="product" type="text" readonly="readonly" value="{$vo.number}" size="4" class="inputBg" style="text-align:center"/>
                         <span onclick="addnum(this,{$vo.price},{$vo.market_price});" style="border:1px solid #ccc; padding:1px 5px; cursor:pointer;">+</span>
                     </td>
                     <td align="center" bgcolor="#ffffff">￥<?php echo $vo['price']*$vo['number']?>元</td>
@@ -82,7 +82,6 @@
                     </td>
                 </tr>
             </table>
-            <input type="hidden" name="step" value="update_cart"/>
         </form>
         <script type="text/javascript">
 
@@ -113,6 +112,8 @@
                     $("#jsje").html(nscje - nxjje);
                     var key = $(o).parent().parent().attr('key');
                     $.get('ajaxUpdateCar/key/' + key + '/num/' + num);
+                    var arr = key.split('-');
+                    getProduct(arr[0],arr[1],num,input);
                 } else {
                     alert('购买数量必须大于1！');
                     return false;
@@ -135,6 +136,8 @@
                 $("#jsje").html(nscje - nxjje);
                 var key = $(o).parent().parent().attr('key');
                 $.get('ajaxUpdateCar/key/' + key + '/num/' + num);
+                var arr = key.split('-');
+                getProduct(arr[0],arr[1],num,input);
             }
 
             function deltr(o,price,mprice) {
@@ -158,30 +161,37 @@
                 tr.remove();
             }
 
-
             //ajax获取商品库存量
-            function getgoodsnum(gid, gaid, num) {
-                if (gaid != "") {
-                    var url = "__MODULE__/goods/getgoodsnum/gid/" + gid + "/gaid/" + gaid;
+            function getProduct(goods_id, goods_attr, num, input) {
+                if (goods_attr != "") {
+                    var url = "{:url('goods/ajaxGetProduct')}?goods_id=" + goods_id + "&goods_attr=" + goods_attr;
                 } else {
-                    var url = "__MODULE__/goods/getgoodsnum/gid/" + gid;
+                    var url = "{:url('goods/ajaxGetProduct')}?goods_id=" + goods_id;
                 }
                 $.ajax({
                     type: "get",
                     url: url,
+                    dataType:'json',
                     success: function (data) {
-
-                        if (data < num) {
-                            alert('当前商品库存不足！');
-                            $("#jszx").attr("href", "javascript:;");
+                        if (data.num < num) {
+                            $(input).css('color','red');
+                            $('#jszx').attr('href','javascript:;');
                         } else {
-                            $("#jszx").attr("href", "/shop/index.php/Home/Flow/flow2");
+                            $(input).css('color','');
+                            $('#jszx').attr('href',"{:url('flow2')}");
                         }
 
                     }
                 });
             }
-
+            $(function(){
+                $('.product').each(function(){
+                    var key = $(this).parent().parent().attr('key');
+                    var arr = key.split('-');
+                    var num = $(this).val();
+                    getProduct(arr[0], arr[1], num, this);
+                });
+            });
         </script>
         <table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
             <tr>

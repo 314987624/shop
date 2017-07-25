@@ -61,12 +61,19 @@ class User extends Common
             $res = Db::table('member')->where('username',$data['username'])->find();
             if($res && $res['password'] == md5($data['password'])){
                 session('uname',$res['username']);
+                session('uid',$res['id']);
                 if(isset($data['remember'])){
                     $time = 3600 * 24;
                     cookie('username', $res['username'], $time);
                     cookie('password', $res['password'], $time);
                 }
-                $this->success('登录成功', url('index/index'));
+                if(session('?resultUrl')){
+                    $url = session('resultUrl');
+                    session('resultUrl',null);
+                    $this->success('登录成功', $url);
+                }else{
+                    $this->success('登录成功', url('index/index'));
+                }
             }else{
                 $this->error('登录失败');
             }
@@ -82,6 +89,7 @@ class User extends Common
             die;
         }
         session('uname',null);
+        session('uid',null);
         cookie('username',null);
         cookie('password',null);
         $this->redirect('index/index','','302');

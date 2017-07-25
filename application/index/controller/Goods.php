@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\model\Cate;
+use app\index\model\Product;
 use think\Db;
 
 class Goods extends Common
@@ -36,5 +37,35 @@ class Goods extends Common
             'cate_list' => $cate_list
         ]);
         return $this->fetch();
+    }
+    //总共的库存
+    public function ajaxSumProduct($goods_id)
+    {
+        if(request()->isAjax()){
+            $product =  new Product();
+            $sum = $product->sumProduct($goods_id);
+            if($sum){
+                return json(['sum'=>$sum]);
+            }else{
+                return json(['sum'=>0]);
+            }
+        }else{
+            $this->error('非法操作');
+        }
+    }
+    //某一属性的库存
+    public function ajaxGetProduct($goods_id,$goods_attr = '')
+    {
+        if(request()->isAjax()){
+            $product =  new Product();
+            $num = $product->getProduct($goods_id,$goods_attr);
+            if($num){
+                return json(['num'=>$num]);
+            }else{
+                return json(['num'=>0]);
+            }
+        }else{
+            $this->error('非法操作');
+        }
     }
 }
