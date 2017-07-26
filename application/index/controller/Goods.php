@@ -59,11 +59,7 @@ class Goods extends Common
         if(request()->isAjax()){
             $product =  new Product();
             $num = $product->getProduct($goods_id,$goods_attr);
-            if($num){
-                return json(['num'=>$num]);
-            }else{
-                return json(['num'=>0]);
-            }
+            return json(['num'=>$num]);
         }else{
             $this->error('非法操作');
         }

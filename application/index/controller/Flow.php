@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\model\Car;
+use app\index\model\Product;
 use think\Db;
 
 class Flow extends Common
@@ -44,13 +45,28 @@ class Flow extends Common
             $this->error($r);
             die;
         }
+        //锁机制
+        $fp = fopen('./order.lock','r');
+        flock($fp,LOCK_EX);
+        //检查库存
+        $car = new Car();
+        $goodsInfo = $car->getGoodsInfo();
+        $product = new Product();
+        foreach($goodsInfo as $k => $v){
+            $arr = explode('-',$k);
+            $num = $product->getProduct($arr[0],$arr[1]);
+            if($num < $v['number']){
+                flock($fp,LOCK_UN);
+                fclose($fp);
+                $this->error($v['goods_name'].' 的库存不足，请减少商品数量！');
+                die;
+            }
+        }
         $data['sn'] = time().rand(111111,999999);
         $data['addtime'] = time();
         $data['mid'] = session('uid');
         $order_id = Db::table('order')->insertGetId($data);
         if($order_id){
-            $car = new Car();
-            $goodsInfo = $car->getGoodsInfo();
             foreach($goodsInfo as $k => $v){
                 $arr = explode('-',$k);
                 $data2 = [
@@ -64,12 +80,23 @@ class Flow extends Common
                     'order_id' =>  $order_id
                 ];
                 Db::table('order_goods')->insert($data2);
+                $product->where(['goods_id'=>$arr[0],'goods_attr'=>$arr[1]])
+                    ->setDec($v['number']);
             }
             cookie('car',null);
+            flock($fp,LOCK_UN);
+            fclose($fp);
             $this->success('提交成功','flow4');
         }else{
+            flock($fp,LOCK_UN);
+            fclose($fp);
             $this->error('提交失败');
         }
+    }
+
+    public function flow4()
+    {
+        return $this->fetch();
     }
 
     public function ajaxDelGoods($key)
