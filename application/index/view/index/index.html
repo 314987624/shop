@@ -149,16 +149,16 @@
             {volist name="cate_list" id="vo" key="k"}
             <div class="dt" onmouseover="sw_nav2({$k},1);" onmouseout="sw_nav2({$k},0);">
                 <div class="" id="HandleLI2_{$k}">
-                    <a class="a" href="mbmeilishuo/category.php?id=132">
+                    <a class="a" href="{:url('cate/index',['id'=>$vo.id])}">
                         {$vo.cate_name}<img src="/static/images/biao8.gif">
                     </a>
                 </div>
                 <dd id="DisSub2_{$k}" style="display: none;">
                     {volist name="vo.child" id="vo2"}
-                    <a class="over_2" href="mbmeilishuo/category.php?id=138">{$vo2.cate_name}</a>
+                    <a class="over_2" href="{:url('cate/index',['id'=>$vo2.id])}">{$vo2.cate_name}</a>
                     <div class="clearfix">
                         {volist name="vo2.child" id="vo3"}
-                        <a class="over_3" href="mbmeilishuo/category.php?id=139">{$vo3.cate_name}</a>
+                        <a class="over_3" href="{:url('cate/index',['id'=>$vo3.id])}">{$vo3.cate_name}</a>
                         {/volist}
                     </div>
                     {/volist}

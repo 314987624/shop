@@ -47,8 +47,10 @@
 <div class="block box">
     <div class="blank"></div>
     <div id="ur_here">
-        当前位置: <a href="/mbmeilishuo/">首页</a> <code>&gt;</code> <a href="/mbmeilishuo/category.php?id=21">女装</a> <code>
-        &gt;</code> <a href="/mbmeilishuo/category.php?id=29">衬衫</a> <code>&gt;</code> 毛貂毛边卫衣套装
+        当前位置: <a href="/mbmeilishuo/">首页</a>
+        {volist name="cate_pos" id="vo"}
+        <code>&gt;</code> <a href="{:url('cate/index',['id'=>$vo.id])}">{$vo.cate_name}</a>
+        {/volist}
     </div>
 </div>
 <div class="blank"></div>
@@ -69,7 +71,7 @@
                     </h1>
                     <ul style="display:none">
                         {volist name="vo.child" id="vo2"}
-                        <a class="over_2" href="">{$vo2.cate_name}</a>
+                        <a class="over_2" href="{:url('cate/index',['id'=>$vo2.id])}">{$vo2.cate_name}</a>
                         <div class="clearfix"></div>
                         {/volist}
                     </ul>
@@ -94,7 +96,7 @@
                 else(obj_ul.item(id).style.display == "none")
                 {
                     obj_ul.item(id).style.display = "block"
-                    obj_img.item(id).src = "/static/images/btn_fold.gif"
+                    obj_img.item(id).src = "/static/images/btn_unfold.gif"
                 }
             }
         </script>
@@ -387,35 +389,13 @@
             <div class="box_1">
                 <h3><span class="text">购买过此商品的人还购买过</span></h3>
                 <div class="boxCenterList clearfix ie6" style="padding:2px;">
+                    {volist name="goods_list" id="vo"}
                     <div class="goodsItem" style="padding: 10px 2px 15px 2px;">
-                        <a href="/mbmeilishuo/goods.php?id=138"><img src="/static/images/138_thumb_G_1413929827659.jpg"
-                                                                     alt="现货发售 马海毛保暖毛衣" class="goodsimg"></a><br>
-                        <p><a href="/mbmeilishuo/goods.php?id=138" title="现货发售 马海毛保暖毛衣">现货发售 马海毛保暖毛衣</a></p>
-                        <font class="shop_s">120元</font>
+                        <a href="{:url('goods/index',['id'=>$vo.id])}"><img src="/{$vo.mid_thumb}" alt="高质感毛呢大衣" class="goodsimg"></a><br>
+                        <p><a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}">{$vo.goods_name}</a></p>
+                        <font class="shop_s">{$vo.shop_price}元</font>
                     </div>
-                    <div class="goodsItem" style="padding: 10px 2px 15px 2px;">
-                        <a href="/mbmeilishuo/goods.php?id=136"><img src="/static/images/136_thumb_G_1413930502490.jpg"
-                                                                     alt="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸靴"
-                                                                     class="goodsimg"></a><br>
-                        <p><a href="/mbmeilishuo/goods.php?id=136" title="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸靴">米兰时装周同款
-                            法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸...</a></p>
-                        <font class="shop_s">110元</font>
-                    </div>
-                    <div class="goodsItem" style="padding: 10px 2px 15px 2px;">
-                        <a href="/mbmeilishuo/goods.php?id=141"><img src="/static/images/141_thumb_G_1413926445469.jpg"
-                                                                     alt="高质感毛呢大衣" class="goodsimg"></a><br>
-                        <p><a href="/mbmeilishuo/goods.php?id=141" title="高质感毛呢大衣">高质感毛呢大衣</a></p>
-                        <font class="shop_s">110元</font>
-                    </div>
-                    <div class="goodsItem" style="padding: 10px 2px 15px 2px;">
-                        <a href="/mbmeilishuo/goods.php?id=134"><img src="/static/images/134_thumb_G_1413930635678.jpg"
-                                                                     alt="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气质长袖针织衫+半身裙 两件套连衣裙套装"
-                                                                     class="goodsimg"></a><br>
-                        <p><a href="/mbmeilishuo/goods.php?id=134"
-                              title="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气质长袖针织衫+半身裙 两件套连衣裙套装">韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙
-                            气...</a></p>
-                        <font class="shop_s">110元</font>
-                    </div>
+                    {/volist}
                 </div>
             </div>
         </div>

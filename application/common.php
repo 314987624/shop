@@ -76,3 +76,13 @@ function sendMail($to,$title,$content){
         return false;
     }
 }
+
+//配送价格
+function psjg($peisong,$weight,$province,$city,$county)
+{
+    if($peisong == '顺风'){
+        return 30;
+    }else{
+        return 15;
+    }
+}

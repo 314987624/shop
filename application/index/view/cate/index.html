@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="Keywords" content="">
     <meta name="Description" content="">
-    <title>女装童老师thinkphp交流群：484519446 - Powered by ECShop</title>
+    <title>商品列表</title>
     <link rel="shortcut icon" href="mbmeilishuo/favicon.ico">
     <link rel="icon" href="mbmeilishuo/animated_favicon.gif" type="image/gif">
     <link href="/static/style/style.css" rel="stylesheet" type="text/css">
@@ -22,7 +22,10 @@
 <div class="block box">
     <div class="blank"></div>
     <div id="ur_here">
-        当前位置: <a href="mbmeilishuo/">首页</a> <code>&gt;</code> <a href="mbmeilishuo/category.php?id=21">女装</a>
+        当前位置: <a href="/">首页</a>
+        {volist name="cate_pos" id="vo"}
+        <code>&gt;</code> <a href="{:url('cate/index',['id'=>$vo.id])}">{$vo.cate_name}</a>
+        {/volist}
     </div>
 </div>
 <div class="blank"></div>
@@ -39,14 +42,14 @@
                         <span class="f_l">
                             <img src="/static/images/btn_fold.gif" style="padding-top:10px;padding-right:6px;cursor:pointer;">
                         </span>
-                        <a href="mbmeilishuo/category.php?id=132" class="  f_l">{$vo.cate_name}</a>
+                        <a href="{:url('cate/index',['id'=>$vo.id])}" class="  f_l">{$vo.cate_name}</a>
                     </h1>
                     <ul style="display:none">
                         {volist name="vo.child" id="vo2"}
-                        <a class="over_2" href="mbmeilishuo/category.php?id=138">{$vo2.cate_name}</a>
+                        <a class="over_2" href="{:url('cate/index',['id'=>$vo2.id])}">{$vo2.cate_name}</a>
                         <div class="clearfix">
                             {volist name="vo2.child" id="vo3"}
-                            <a class="over_3" href="mbmeilishuo/category.php?id=139">{$vo3.cate_name}</a>
+                            <a class="over_3" href="{:url('cate/index',['id'=>$vo3.id])}">{$vo3.cate_name}</a>
                             {/volist}
                         </div>
                         {/volist}
@@ -72,7 +75,7 @@
                 else(obj_ul.item(id).style.display == "none")
                 {
                     obj_ul.item(id).style.display = "block"
-                    obj_img.item(id).src = "/static/images/btn_fold.gif"
+                    obj_img.item(id).src = "/static/images/btn_unfold.gif"
                 }
             }
         </script>
@@ -181,148 +184,43 @@
                 <h3>
                     <span>商品列表</span>
                     <form method="GET" class="sort" name="listform">
-                        显示方式：
-                        <a href="javascript:;" onclick="javascript:display_mode('list')"><img
-                                src="/static/images/display_mode_list.gif" alt=""></a>
-                        <a href="javascript:;" onclick="javascript:display_mode('grid')"><img
-                                src="/static/images/display_mode_grid_act.gif" alt=""></a>
-                        <a href="javascript:;" onclick="javascript:display_mode('text')"><img
-                                src="/static/images/display_mode_text.gif" alt=""></a>&nbsp;&nbsp;
+                        <!--显示方式：-->
+                        <!--<a href="javascript:;" onclick="javascript:display_mode('list')"><img-->
+                                <!--src="/static/images/display_mode_list.gif" alt=""></a>-->
+                        <!--<a href="javascript:;" onclick="javascript:display_mode('grid')"><img-->
+                                <!--src="/static/images/display_mode_grid_act.gif" alt=""></a>-->
+                        <!--<a href="javascript:;" onclick="javascript:display_mode('text')"><img-->
+                                <!--src="/static/images/display_mode_text.gif" alt=""></a>&nbsp;&nbsp;-->
 
-                        <a href="mbmeilishuo/category.php?category=21&amp;display=grid&amp;brand=0&amp;price_min=0&amp;price_max=0&amp;filter_attr=0&amp;page=1&amp;sort=goods_id&amp;order=ASC#goods_list"><img
-                                src="/static/images/goods_id_DESC.gif" alt="按上架时间排序"></a>
-                        <a href="mbmeilishuo/category.php?category=21&amp;display=grid&amp;brand=0&amp;price_min=0&amp;price_max=0&amp;filter_attr=0&amp;page=1&amp;sort=shop_price&amp;order=ASC#goods_list"><img
-                                src="/static/images/shop_price_default.gif" alt="按价格排序"></a>
-                        <a href="mbmeilishuo/category.php?category=21&amp;display=grid&amp;brand=0&amp;price_min=0&amp;price_max=0&amp;filter_attr=0&amp;page=1&amp;sort=last_update&amp;order=DESC#goods_list"><img
-                                src="/static/images/last_update_default.gif" alt="按更新时间排序"></a>
-                        <input name="category" value="21" type="hidden">
-                        <input name="display" value="grid" id="display" type="hidden">
-                        <input name="brand" value="0" type="hidden">
-                        <input name="price_min" value="0" type="hidden">
-                        <input name="price_max" value="0" type="hidden">
-                        <input name="filter_attr" value="0" type="hidden">
-                        <input name="page" value="1" type="hidden">
-                        <input name="sort" value="goods_id" type="hidden">
-                        <input name="order" value="DESC" type="hidden">
+                        <a href="{:url('cate/index',['od'=>'id','om'=>'desc'])}">
+                            <img src="/static/images/goods_id_DESC.gif" alt="按上架时间排序"></a>
+
+                        <a href="{:url('cate/index',['od'=>'price'])}">
+                            <img src="/static/images/shop_price_default.gif" alt="按价格排序"></a>
+
+                        <a href="{:url('cate/index',['od'=>'price'])}">
+                            <img src="/static/images/last_update_default.gif" alt="按更新时间排序"></a>
                     </form>
                 </h3>
                 <form name="compareForm" action="compare.php" method="post" onsubmit="return compareGoods(this);">
                     <div class="clearfix goodsBox" style="border:none;">
+                        {volist name="goods_list" id="vo"}
                         <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=208"><img
-                                    src="/static/images/208_thumb_G_1419373849576.png" alt="简约纯色时尚保暖" class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=208" title="简约纯色时尚保暖">简约纯色时尚保暖</a></p>
-                            市场价：<font class="market_s">120元</font><br>
-                            本店价：<font class="shop_s">100元</font><br>
-
+                            <a href="{:url('goods/index',['id'=>$vo.id])}"><img src="/{$vo.mid_thumb}" alt="{$vo.goods_name}" class="goodsimg"></a><br>
+                            <p><a href="{:url('goods/index',['id'=>$vo.id])}" title="{$vo.goods_name}"></a></p>
+                            市场价：<font class="market_s">{$vo.market_price}元</font><br>
+                            本店价：<font class="shop_s">{$vo.shop_price}元</font><br>
                         </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=141"><img
-                                    src="/static/images/141_thumb_G_1413926445469.jpg" alt="高质感毛呢大衣"
-                                    class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=141" title="高质感毛呢大衣">高质感毛呢大衣</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            促销价：<font class="shop_s">110元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=140"><img
-                                    src="/static/images/140_thumb_G_1413928959052.jpg" alt="毛貂毛边卫衣套装" class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=140" title="毛貂毛边卫衣套装">毛貂毛边卫衣套装</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            促销价：<font class="shop_s">110元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=139"><img
-                                    src="/static/images/139_thumb_G_1413929154297.jpg"
-                                    alt="秋冬黑色天鹅毛衣七分袖休闲套头毛衣蕾丝网纱半身裙蓬蓬裙套装" class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=139" title="秋冬黑色天鹅毛衣七分袖休闲套头毛衣蕾丝网纱半身裙蓬蓬裙套装">秋冬黑色天鹅毛衣七分袖休闲套头毛衣蕾丝网纱半身裙蓬蓬裙套装</a>
-                            </p>
-                            市场价：<font class="market_s">144元</font><br>
-                            促销价：<font class="shop_s">110元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=138"><img
-                                    src="/static/images/138_thumb_G_1413929827659.jpg" alt="现货发售 马海毛保暖毛衣"
-                                    class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=138" title="现货发售 马海毛保暖毛衣">现货发售 马海毛保暖毛衣</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            本店价：<font class="shop_s">120元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=137"><img
-                                    src="/static/images/137_thumb_G_1413930199355.jpg" alt="蜜糖家 METIME 秋季新品 自制薄毛呢西装长马甲"
-                                    class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=137" title="蜜糖家 METIME 秋季新品 自制薄毛呢西装长马甲">蜜糖家 METIME 秋季新品
-                                自制薄毛呢西装长马甲</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            本店价：<font class="shop_s">120元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=136"><img
-                                    src="/static/images/136_thumb_G_1413930502490.jpg"
-                                    alt="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸..." class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=136" title="米兰时装周同款 法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸靴">米兰时装周同款
-                                法式优雅女人味性感尖头及踝靴 细跟高跟短靴裸...</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            促销价：<font class="shop_s">110元</font><br>
-
-                        </div>
-                        <div class="goodsItem" style="padding: 10px 3px 15px 2px;">
-                            <a href="mbmeilishuo/goods.php?id=134"><img
-                                    src="/static/images/134_thumb_G_1413930635678.jpg"
-                                    alt="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气..." class="goodsimg"></a><br>
-                            <p><a href="mbmeilishuo/goods.php?id=134"
-                                  title="韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙 气质长袖针织衫+半身裙 两件套连衣裙套装">韩味HW-2014初冬套装 毛衣外套 长袖连衣裙 蓬蓬裙
-                                气...</a></p>
-                            市场价：<font class="market_s">144元</font><br>
-                            促销价：<font class="shop_s">110元</font><br>
-
-                        </div>
+                        {/volist}
                     </div>
                 </form>
 
             </div>
         </div>
         <div class="blank5"></div>
-        <script type="Text/Javascript" language="JavaScript">
-            <!--
-            function selectPage(sel) {
-                sel.form.submit();
-            }
-            //-->
-        </script>
-        <script type="text/javascript">
-            window.onload = function () {
-                Compare.init();
-                fixpng();
-            }
-            var button_compare = '';
-            var exist = "您已经选择了%s";
-            var count_limit = "最多只能选择4个商品进行对比";
-            var goods_type_different = "\"%s\"和已选择商品类型不同无法进行对比";
-            var compare_no_goods = "您没有选定任何需要比较的商品或者比较的商品数少于 2 个。";
-            var btn_buy = "购买";
-            var is_cancel = "取消";
-            var select_spe = "请选择商品属性";
-        </script>
-        <form name="selectPageForm" action="/mbmeilishuo/category.php" method="get">
-            <div id="pager" class="pagebar">
-                <span class="f_l " style="margin-right:10px;">总计 <b>8</b>  个记录</span>
-
-            </div>
-        </form>
-        <script type="Text/Javascript" language="JavaScript">
-            <!--
-            function selectPage(sel) {
-                sel.form.submit();
-            }
-            //-->
-        </script>
+        <div style="height: 50px;">
+            {$goods_list->render()}
+        </div>
     </div>
 
 </div>

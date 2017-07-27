@@ -44,5 +44,35 @@ class Cate extends Model
         return $data;
     }
 
+    //获取栏目路径
+    public function getCatePos($id)
+    {
+        static $data = [];
+        $cate = $this->find($id)->data;
+        $data[] = $cate;
+        if($cate['pid'] != 0){
+            $this->getCatePos($cate['pid']);
+        }
+        sort($data);
+        return $data;
+    }
+    //获取所有子栏目ID
+    public function getChildrenCateIds($id)
+    {
+        $ids[] = $id;
+        $data = Db::table('cate')->where('pid',$id)->select();
+        foreach($data as $k => $v){
+            $ids[] = $v['id'];
+            $data[$k]['child'] = Db::table('cate')->where('pid',$v['id'])->select();
+            foreach($data[$k]['child'] as $k2 => $v2){
+                $ids[] = $v2['id'];
+                $data[$k]['child'][$k2]['child'] = Db::table('cate')->where('pid',$v2['id'])->select();
+                foreach($data[$k]['child'][$k2]['child'] as $k3 => $v3){
+                    $ids[] = $v3['id'];
+                }
+            }
+        }
+        return $ids;
+    }
 
 }

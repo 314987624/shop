@@ -20,6 +20,7 @@ class Flow extends Common
     {
         $car = new Car();
         $goodsInfo = $car->getGoodsInfo();;
+        dump($goodsInfo);
         $this->assign('goodsInfo',$goodsInfo);
         return $this->fetch();
     }
@@ -52,7 +53,9 @@ class Flow extends Common
         $car = new Car();
         $goodsInfo = $car->getGoodsInfo();
         $product = new Product();
+        $weight = 0;
         foreach($goodsInfo as $k => $v){
+            $weight += $v['weight'];
             $arr = explode('-',$k);
             $num = $product->getProduct($arr[0],$arr[1]);
             if($num < $v['number']){
@@ -62,9 +65,22 @@ class Flow extends Common
                 die;
             }
         }
+        if($data['pay'] == '余额'){
+            $money = Db::table('member')->where('id',session('uid'))->field('money')->find();
+            if($money >= $data['tprice']){
+                Db::table('member')->where('id',session('uid'))->setDec('money',$data['tprice']);
+                $data['pay_status'] = 1;
+            }else{
+                flock($fp,LOCK_UN);
+                fclose($fp);
+                $this->error('余额不足，提交失败');
+            }
+        }
         $data['sn'] = time().rand(111111,999999);
         $data['addtime'] = time();
         $data['mid'] = session('uid');
+        $data['yprice'] = psjg($data['peisong'],$weight,$data['province'],$data['city'],$data['county']);
+        $data['tprice'] = $data['gtprice'] + $data['yprice'];
         $order_id = Db::table('order')->insertGetId($data);
         if($order_id){
             foreach($goodsInfo as $k => $v){
@@ -81,7 +97,7 @@ class Flow extends Common
                 ];
                 Db::table('order_goods')->insert($data2);
                 $product->where(['goods_id'=>$arr[0],'goods_attr'=>$arr[1]])
-                    ->setDec($v['number']);
+                    ->setDec('goods_number',$v['number']);
             }
             cookie('car',null);
             flock($fp,LOCK_UN);
@@ -128,4 +144,5 @@ class Flow extends Common
             $this->error('非法操作');
         }
     }
+
 }

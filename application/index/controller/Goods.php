@@ -29,12 +29,17 @@ class Goods extends Common
         $cate = new Cate();
         $parent_cate = $cate->getParentCate($data['cate_id']);
         $cate_list = $cate->getChildrenCate($parent_cate['id']);
+        $cate_pos = $cate->getCatePos($data['cate_id']);
+        $goods_list = Db::table('goods')->where('cate_id',$data['cate_id'])
+            ->field('id,goods_name,mid_thumb,shop_price')->limit(8)->select();
         $this->assign([
             'data' => $data,
             'goods_pic' => $goods_pic,
             'only_attr' => $only_attr,
             'radio_attr' => $radio_attr,
-            'cate_list' => $cate_list
+            'cate_list' => $cate_list,
+            'cate_pos' => $cate_pos,
+            'goods_list' => $goods_list
         ]);
         return $this->fetch();
     }

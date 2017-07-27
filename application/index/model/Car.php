@@ -41,11 +41,12 @@ class Car extends Model
         $goodsInfo = [];
         foreach($car as $k => $v){
             $arr = explode('-',$k);
-            $goods = Db::table('goods')->field('goods_name,mid_thumb,market_price,shop_price')->find($arr[0]);
+            $goods = Db::table('goods')->field('goods_name,mid_thumb,market_price,shop_price,goods_weight,weight_unit')->find($arr[0]);
             $goodsInfo[$k]['goods_name'] = $goods['goods_name'];
             $goodsInfo[$k]['mid_thumb'] = $goods['mid_thumb'];
             $goodsInfo[$k]['market_price'] = $goods['market_price'];
             $goodsInfo[$k]['shop_price'] = $goods['shop_price'];
+            $goodsInfo[$k]['weight'] = $goods['weight_unit'] == 0 ? $goods['goods_weight']/1000 : $goods['goods_weight'];
             $goodsInfo[$k]['number'] = $v;
             $map['g.id'] = ['in',$arr[1]];
             $attr = Db::table('goods_attr')->alias('g')
