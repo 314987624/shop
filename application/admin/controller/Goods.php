@@ -132,6 +132,7 @@ class Goods extends Common
                         @unlink($img['mid_thumb']);
                         @unlink($img['max_thumb']);
                     }
+                    $data['update_time'] = time();
                     Db::table('goods')->where('id',$id)->update($data);
                     //推荐位
                     Db::table('recvalue')->where(['valueid'=>$id,'rectype'=>1])->delete();

@@ -191,15 +191,39 @@
                                 <!--src="/static/images/display_mode_grid_act.gif" alt=""></a>-->
                         <!--<a href="javascript:;" onclick="javascript:display_mode('text')"><img-->
                                 <!--src="/static/images/display_mode_text.gif" alt=""></a>&nbsp;&nbsp;-->
-
-                        <a href="{:url('cate/index',['od'=>'id','om'=>'desc'])}">
+                        {if condition="$od eq 'id' && $ow eq 'desc'"}
+                        <a href="{:url('cate/index',['od'=>'id','ow'=>'asc'])}">
                             <img src="/static/images/goods_id_DESC.gif" alt="按上架时间排序"></a>
+                        {elseif condition="$od eq 'id' && $ow eq 'asc'"}
+                        <a href="{:url('cate/index',['od'=>'id','ow'=>'desc'])}">
+                            <img src="/static/images/goods_id_ASC.gif" alt="按上架时间排序"></a>
+                        {else/}
+                        <a href="{:url('cate/index',['od'=>'id','ow'=>'desc'])}">
+                            <img src="/static/images/goods_id_default.gif" alt="按上架时间排序"></a>
+                        {/if}
 
-                        <a href="{:url('cate/index',['od'=>'price'])}">
+                        {if condition="$od eq 'shop_price' && $ow eq 'desc'"}
+                        <a href="{:url('cate/index',['od'=>'shop_price','ow'=>'asc'])}">
+                            <img src="/static/images/shop_price_DESC.gif" alt="按价格排序"></a>
+                        {elseif condition="$od eq 'shop_price' && $ow eq 'asc'"}
+                        <a href="{:url('cate/index',['od'=>'shop_price','ow'=>'desc'])}">
+                            <img src="/static/images/shop_price_ASC.gif" alt="按价格排序"></a>
+                        {else/}
+                        <a href="{:url('cate/index',['od'=>'shop_price','ow'=>'desc'])}">
                             <img src="/static/images/shop_price_default.gif" alt="按价格排序"></a>
+                        {/if}
 
-                        <a href="{:url('cate/index',['od'=>'price'])}">
+                        {if condition="$od eq 'update_time' && $ow eq 'desc'"}
+                        <a href="{:url('cate/index',['od'=>'update_time','ow'=>'asc'])}">
+                            <img src="/static/images/last_update_DESC.gif" alt="按更新时间排序"></a>
+                        {elseif condition="$od eq 'update_time' && $ow eq 'asc'"}
+                        <a href="{:url('cate/index',['od'=>'update_time','ow'=>'desc'])}">
+                            <img src="/static/images/last_update_ASC.gif" alt="按更新时间排序"></a>
+                        {else/}
+                        <a href="{:url('cate/index',['od'=>'update_time','ow'=>'desc'])}">
                             <img src="/static/images/last_update_default.gif" alt="按更新时间排序"></a>
+                        {/if}
+
                     </form>
                 </h3>
                 <form name="compareForm" action="compare.php" method="post" onsubmit="return compareGoods(this);">

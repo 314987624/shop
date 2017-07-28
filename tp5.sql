@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-25 13:46:33
+-- Generation Time: 2017-07-28 16:11:16
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -189,60 +189,62 @@ CREATE TABLE IF NOT EXISTS `cate` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '栏目ID',
   `cate_name` varchar(30) NOT NULL COMMENT '栏目名称',
   `pid` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '栏目PID',
+  `search_attr_id` varchar(150) NOT NULL COMMENT '筛选属性ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
 -- 转存表中的数据 `cate`
 --
 
-INSERT INTO `cate` (`id`, `cate_name`, `pid`) VALUES
-(22, '内衣', 17),
-(21, '开衫', 18),
-(20, '套头衫', 18),
-(19, '针织背心', 18),
-(18, '针织衫', 17),
-(17, '男装', 0),
-(23, '内衣/套装', 22),
-(24, '袜子', 22),
-(25, '家居服', 22),
-(26, '内裤', 22),
-(27, '外套', 17),
-(28, '皮衣/皮草', 27),
-(29, '卫衣', 27),
-(30, '风衣', 27),
-(31, '大衣', 27),
-(32, '西服', 27),
-(33, '女装', 0),
-(34, 'T恤/POLO', 33),
-(35, 'POLO衫', 34),
-(36, '短袖T恤', 34),
-(37, '长袖T恤', 34),
-(38, '衬衫', 33),
-(39, '长袖衬衫', 38),
-(40, '短袖衬衫', 38),
-(41, '裤子', 33),
-(42, '牛仔分裤', 41),
-(43, '牛仔短裤', 41),
-(44, '休闲裤', 41),
-(45, '牛仔裤', 41),
-(46, '休闲短裤', 41),
-(47, '哈伦裤', 41),
-(48, '连身裤', 41),
-(49, '打底裤', 41),
-(50, '运动户外', 0),
-(51, '运动鞋', 50),
-(52, '户外装备', 50),
-(53, '户外鞋服', 50),
-(54, '运动器械', 50),
-(55, '户外服饰', 53),
-(56, '户外鞋袜', 53),
-(57, '户外配饰', 53),
-(58, '帐篷', 52),
-(59, '睡袋', 52),
-(60, '登山攀岩', 52),
-(61, '户外背包', 52),
-(62, '户外照明', 52);
+INSERT INTO `cate` (`id`, `cate_name`, `pid`, `search_attr_id`) VALUES
+(22, '内衣', 17, '0'),
+(21, '开衫', 18, '0'),
+(20, '套头衫', 18, '0'),
+(19, '针织背心', 18, '0'),
+(18, '针织衫', 17, '0'),
+(17, '男装', 0, '0'),
+(23, '内衣/套装', 22, '0'),
+(24, '袜子', 22, '0'),
+(25, '家居服', 22, '0'),
+(26, '内裤', 22, '0'),
+(27, '外套', 17, '0'),
+(28, '皮衣/皮草', 27, '0'),
+(29, '卫衣', 27, '0'),
+(30, '风衣', 27, '0'),
+(31, '大衣', 27, '0'),
+(32, '西服', 27, '0'),
+(33, '女装', 0, '0'),
+(34, 'T恤/POLO', 33, '0'),
+(35, 'POLO衫', 34, '0'),
+(36, '短袖T恤', 34, '0'),
+(37, '长袖T恤', 34, '0'),
+(38, '衬衫', 33, '0'),
+(39, '长袖衬衫', 38, '0'),
+(40, '短袖衬衫', 38, '0'),
+(41, '裤子', 33, '0'),
+(42, '牛仔分裤', 41, '0'),
+(43, '牛仔短裤', 41, '0'),
+(44, '休闲裤', 41, '0'),
+(45, '牛仔裤', 41, '0'),
+(46, '休闲短裤', 41, '0'),
+(47, '哈伦裤', 41, '0'),
+(48, '连身裤', 41, '0'),
+(49, '打底裤', 41, '0'),
+(50, '运动户外', 0, '0'),
+(51, '运动鞋', 50, '0'),
+(52, '户外装备', 50, '0'),
+(53, '户外鞋服', 50, '0'),
+(54, '运动器械', 50, '0'),
+(55, '户外服饰', 53, '0'),
+(56, '户外鞋袜', 53, '0'),
+(57, '户外配饰', 53, '0'),
+(58, '帐篷', 52, '0'),
+(59, '睡袋', 52, '0'),
+(60, '登山攀岩', 52, '0'),
+(61, '户外背包', 52, '0'),
+(62, '户外照明', 52, '0'),
+(63, '裙子', 33, '18,23,17,19,20');
 
 -- --------------------------------------------------------
 
@@ -318,6 +320,7 @@ CREATE TABLE IF NOT EXISTS `goods` (
   `goods_desc` text NOT NULL COMMENT '商品详情',
   `goods_weight` decimal(10,2) NOT NULL COMMENT '商品重量',
   `weight_unit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '重量单位',
+  `update_time` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `cate_id` (`cate_id`,`brand_id`,`type_id`),
   KEY `shop_price` (`shop_price`)
@@ -327,19 +330,19 @@ CREATE TABLE IF NOT EXISTS `goods` (
 -- 转存表中的数据 `goods`
 --
 
-INSERT INTO `goods` (`id`, `goods_name`, `goods_sn`, `original`, `sm_thumb`, `mid_thumb`, `max_thumb`, `market_price`, `shop_price`, `onsale`, `cate_id`, `brand_id`, `type_id`, `goods_desc`, `goods_weight`, `weight_unit`) VALUES
-(9, '韩版美女衫', '1499921720274251', './uploads/goods/28025149994934210942.jpg', './uploads/goods/sm_28025149994934210942.jpg', './uploads/goods/mid_28025149994934210942.jpg', './uploads/goods/max_28025149994934210942.jpg', '400.00', '300.00', 1, 40, 4, 4, '<p>美女<br/></p>', '12.00', 0),
-(10, '潮流POLO衫', '1499922076713460', './uploads/goods/20931149994932727200.jpg', './uploads/goods/sm_20931149994932727200.jpg', './uploads/goods/mid_20931149994932727200.jpg', './uploads/goods/max_20931149994932727200.jpg', '233.00', '200.00', 1, 35, 3, 4, '<p>没vn</p>', '23.00', 0),
-(11, '时尚女裤', '1499922266607638', './uploads/goods/26237149994931326994.jpg', './uploads/goods/sm_26237149994931326994.jpg', './uploads/goods/mid_26237149994931326994.jpg', './uploads/goods/max_26237149994931326994.jpg', '111.00', '100.00', 1, 45, 3, 4, '<p>合欢</p>', '12.00', 0),
-(12, '美女短裙', '1499922352345296', './uploads/goods/14887149994929721716.jpg', './uploads/goods/sm_14887149994929721716.jpg', './uploads/goods/mid_14887149994929721716.jpg', './uploads/goods/max_14887149994929721716.jpg', '233.00', '222.00', 1, 46, 2, 4, '<p>22</p>', '22.00', 0),
-(13, '美女背心', '1499922445747721', './uploads/goods/5953149994927825830.jpg', './uploads/goods/sm_5953149994927825830.jpg', './uploads/goods/mid_5953149994927825830.jpg', './uploads/goods/max_5953149994927825830.jpg', '22.00', '11.00', 1, 36, 5, 4, '', '2.00', 0),
-(14, '风度男装', '1499922575659315', './uploads/goods/9291149994926032296.jpg', './uploads/goods/sm_9291149994926032296.jpg', './uploads/goods/mid_9291149994926032296.jpg', './uploads/goods/max_9291149994926032296.jpg', '222.00', '122.00', 1, 30, 4, 4, '', '22.00', 0),
-(15, '猛男皮夹克', '1499922658918511', './uploads/goods/965149994924620762.jpg', './uploads/goods/sm_965149994924620762.jpg', './uploads/goods/mid_965149994924620762.jpg', './uploads/goods/max_965149994924620762.jpg', '222.00', '111.00', 1, 28, 5, 4, '', '23.00', 0),
-(16, '男毛衫', '1499922741333197', './uploads/goods/29743149994923131292.jpg', './uploads/goods/sm_29743149994923131292.jpg', './uploads/goods/mid_29743149994923131292.jpg', './uploads/goods/max_29743149994923131292.jpg', '222.00', '111.00', 1, 19, 7, 4, '', '22.00', 0),
-(17, '型男服装', '1499922817280110', './uploads/goods/2868114999492188718.jpg', './uploads/goods/sm_2868114999492188718.jpg', './uploads/goods/mid_2868114999492188718.jpg', './uploads/goods/max_2868114999492188718.jpg', '222.00', '221.00', 1, 29, 2, 4, '', '21.00', 0),
-(18, '美女短裤', '1499922906143581', './uploads/goods/2006514999491427558.jpg', './uploads/goods/sm_2006514999491427558.jpg', './uploads/goods/mid_2006514999491427558.jpg', './uploads/goods/max_2006514999491427558.jpg', '222.00', '211.00', 1, 43, 2, 4, '', '11.00', 0),
-(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p>11</p>', '11.00', 0),
-(20, '美女服饰', '1500186108882269', './uploads/goods/13918150018610831295.jpg', './uploads/goods/sm_13918150018610831295.jpg', './uploads/goods/mid_13918150018610831295.jpg', './uploads/goods/max_13918150018610831295.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p><br/></p><p><br/><img alt="" id="a89a52c365c84d00b5d382b7b8d75e78 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t5434/124/94368989/242488/4016ef80/58f8874fNe68bf2cf.jpg"/><img alt="" id="3ac873f99b114250b08e3aac61697076 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t4945/229/1755173706/428637/699a5cf8/58f470aaNf01df63f.jpg"/></p>', '11.00', 0);
+INSERT INTO `goods` (`id`, `goods_name`, `goods_sn`, `original`, `sm_thumb`, `mid_thumb`, `max_thumb`, `market_price`, `shop_price`, `onsale`, `cate_id`, `brand_id`, `type_id`, `goods_desc`, `goods_weight`, `weight_unit`, `update_time`) VALUES
+(9, '韩版美女衫', '1499921720274251', './uploads/goods/28025149994934210942.jpg', './uploads/goods/sm_28025149994934210942.jpg', './uploads/goods/mid_28025149994934210942.jpg', './uploads/goods/max_28025149994934210942.jpg', '400.00', '300.00', 1, 40, 4, 4, '<p>美女<br/></p>', '12.00', 0, 0),
+(10, '潮流POLO衫', '1499922076713460', './uploads/goods/20931149994932727200.jpg', './uploads/goods/sm_20931149994932727200.jpg', './uploads/goods/mid_20931149994932727200.jpg', './uploads/goods/max_20931149994932727200.jpg', '233.00', '200.00', 1, 35, 3, 4, '<p>没vn</p>', '23.00', 0, 0),
+(11, '时尚女裤', '1499922266607638', './uploads/goods/26237149994931326994.jpg', './uploads/goods/sm_26237149994931326994.jpg', './uploads/goods/mid_26237149994931326994.jpg', './uploads/goods/max_26237149994931326994.jpg', '111.00', '100.00', 1, 45, 3, 4, '<p>合欢</p>', '12.00', 0, 0),
+(12, '美女短裙', '1499922352345296', './uploads/goods/14887149994929721716.jpg', './uploads/goods/sm_14887149994929721716.jpg', './uploads/goods/mid_14887149994929721716.jpg', './uploads/goods/max_14887149994929721716.jpg', '233.00', '222.00', 1, 46, 2, 4, '<p>22</p>', '22.00', 0, 0),
+(13, '美女背心', '1499922445747721', './uploads/goods/5953149994927825830.jpg', './uploads/goods/sm_5953149994927825830.jpg', './uploads/goods/mid_5953149994927825830.jpg', './uploads/goods/max_5953149994927825830.jpg', '22.00', '11.00', 1, 36, 5, 4, '', '2.00', 0, 0),
+(14, '风度男装', '1499922575659315', './uploads/goods/9291149994926032296.jpg', './uploads/goods/sm_9291149994926032296.jpg', './uploads/goods/mid_9291149994926032296.jpg', './uploads/goods/max_9291149994926032296.jpg', '222.00', '122.00', 1, 30, 4, 4, '', '22.00', 0, 0),
+(15, '猛男皮夹克', '1499922658918511', './uploads/goods/965149994924620762.jpg', './uploads/goods/sm_965149994924620762.jpg', './uploads/goods/mid_965149994924620762.jpg', './uploads/goods/max_965149994924620762.jpg', '222.00', '111.00', 1, 28, 5, 4, '', '23.00', 0, 0),
+(16, '男毛衫', '1499922741333197', './uploads/goods/29743149994923131292.jpg', './uploads/goods/sm_29743149994923131292.jpg', './uploads/goods/mid_29743149994923131292.jpg', './uploads/goods/max_29743149994923131292.jpg', '222.00', '111.00', 1, 19, 7, 4, '', '22.00', 0, 0),
+(17, '型男服装', '1499922817280110', './uploads/goods/2868114999492188718.jpg', './uploads/goods/sm_2868114999492188718.jpg', './uploads/goods/mid_2868114999492188718.jpg', './uploads/goods/max_2868114999492188718.jpg', '222.00', '221.00', 1, 29, 2, 4, '<p>111</p>', '21.00', 0, 1501215978),
+(18, '美女短裤', '1499922906143581', './uploads/goods/2006514999491427558.jpg', './uploads/goods/sm_2006514999491427558.jpg', './uploads/goods/mid_2006514999491427558.jpg', './uploads/goods/max_2006514999491427558.jpg', '222.00', '211.00', 1, 43, 2, 4, '', '11.00', 0, 0),
+(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p>11</p>', '11.00', 0, 0),
+(20, '美女服饰', '1500186108882269', './uploads/goods/13918150018610831295.jpg', './uploads/goods/sm_13918150018610831295.jpg', './uploads/goods/mid_13918150018610831295.jpg', './uploads/goods/max_13918150018610831295.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p><br/></p><p><br/><img alt="" id="a89a52c365c84d00b5d382b7b8d75e78 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t5434/124/94368989/242488/4016ef80/58f8874fNe68bf2cf.jpg"/><img alt="" id="3ac873f99b114250b08e3aac61697076 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t4945/229/1755173706/428637/699a5cf8/58f470aaNf01df63f.jpg"/></p>', '11.00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -521,6 +524,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `mail_str` varchar(32) NOT NULL COMMENT '邮箱验证字符串',
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '性别:0保密1男2女',
   `regtime` int(10) unsigned NOT NULL COMMENT '注册时间',
+  `money` decimal(10,0) unsigned NOT NULL COMMENT '余额',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
@@ -528,8 +532,8 @@ CREATE TABLE IF NOT EXISTS `member` (
 -- 转存表中的数据 `member`
 --
 
-INSERT INTO `member` (`id`, `username`, `password`, `email`, `check_mail`, `mail_str`, `sex`, `regtime`) VALUES
-(5, 'xiexie', '4297f44b13955235245b2497399d7a93', '448408740@qq.com', 0, '2f09a0ebdd1532967d9dee022df370c0', 0, 1500110736);
+INSERT INTO `member` (`id`, `username`, `password`, `email`, `check_mail`, `mail_str`, `sex`, `regtime`, `money`) VALUES
+(5, 'xiexie', '4297f44b13955235245b2497399d7a93', '448408740@qq.com', 0, '2f09a0ebdd1532967d9dee022df370c0', 0, 1500110736, '9659');
 
 -- --------------------------------------------------------
 
@@ -687,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `order` (
   `pay_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未支付，1已支付',
   `fh_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0未发货，1已发货，2已收货',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `order`
@@ -695,7 +699,11 @@ CREATE TABLE IF NOT EXISTS `order` (
 
 INSERT INTO `order` (`id`, `sn`, `addtime`, `shr`, `province`, `city`, `county`, `adress`, `phone`, `mid`, `peisong`, `pay`, `gtprice`, `yprice`, `tprice`, `order_status`, `pay_status`, `fh_status`) VALUES
 (1, '', 0, '小米', '湖北省', '地级市', '市、县级市', '信息信息', '13455554444', 0, '顺丰', '支付宝', '763.00', '0.00', '0.00', 0, 0, 0),
-(2, '1500882563302544', 1500882563, '小红', '安徽省', '亳州市', '城关镇', '小红的家', '13455556666', 5, '申通', '余额', '763.00', '0.00', '0.00', 0, 0, 0);
+(2, '1500882563302544', 1500882563, '小红', '安徽省', '亳州市', '城关镇', '小红的家', '13455556666', 5, '申通', '余额', '763.00', '0.00', '0.00', 0, 0, 0),
+(3, '1501036506374104', 1501036506, '小米', '河南省', '周口市', '沈丘县', '小米之家', '13455554444', 5, '顺丰', '支付宝', '865.00', '0.00', '0.00', 0, 0, 0),
+(4, '1501125600721489', 1501125600, '小小', '河南省', '周口市', '沈丘县', '嘻嘻加', '18511891604', 5, '顺丰', '余额', '326.00', '15.00', '341.00', 0, 0, 0),
+(5, '1501125841135525', 1501125841, '嘻嘻', '湖北省', '荆门市', '沙洋县', '嘻嘻嘻', '18511891604', 5, '顺丰', '余额', '326.00', '15.00', '341.00', 0, 0, 0),
+(6, '1501126238113009', 1501126238, '嘻嘻嘻', '上海市', '上海市', '徐汇区', '嘻嘻嘻', '13455554444', 5, '顺丰', '余额', '326.00', '15.00', '341.00', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -714,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `order_goods` (
   `goods_num` smallint(5) unsigned NOT NULL COMMENT '商品数量',
   `order_id` mediumint(8) unsigned NOT NULL COMMENT '订单ID',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `order_goods`
@@ -726,7 +734,13 @@ INSERT INTO `order_goods` (`id`, `goods_id`, `goods_name`, `goods_attr_id`, `goo
 (3, 12, '美女短裙', '96,102', '尺码:M<br/>颜色:黑色', '222.00', '233.00', 1, 1),
 (4, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 2, 2),
 (5, 19, '大气时尚女装', '145,151', '尺码:M<br/>颜色:白色', '111.00', '222.00', 1, 2),
-(6, 12, '美女短裙', '96,102', '尺码:M<br/>颜色:黑色', '222.00', '233.00', 1, 2);
+(6, 12, '美女短裙', '96,102', '尺码:M<br/>颜色:黑色', '222.00', '233.00', 1, 2),
+(7, 20, '美女服饰', '152,160', '尺码:M [+11.00]<br/>颜色:黑色 [+11.00]', '111.00', '222.00', 4, 3),
+(8, 19, '大气时尚女装', '145,151', '尺码:M<br/>颜色:白色', '111.00', '222.00', 3, 3),
+(9, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 1, 4),
+(10, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 1, 5),
+(11, 10, '潮流POLO衫', '79,85', '尺码:XML [+15.00]<br/>颜色:黑色', '200.00', '233.00', 1, 6),
+(12, 19, '大气时尚女装', '145,151', '尺码:M<br/>颜色:白色', '111.00', '222.00', 1, 6);
 
 -- --------------------------------------------------------
 
@@ -740,17 +754,20 @@ CREATE TABLE IF NOT EXISTS `product` (
   `goods_number` mediumint(8) unsigned NOT NULL COMMENT '库存数量',
   `goods_attr` varchar(150) NOT NULL COMMENT '库存属性',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `product`
 --
 
 INSERT INTO `product` (`id`, `goods_id`, `goods_number`, `goods_attr`) VALUES
-(48, 19, 3, '145,151'),
+(48, 19, 2, '145,151'),
 (47, 20, 44, '154,161'),
 (46, 20, 44, '153,161'),
-(45, 20, 33, '152,160');
+(45, 20, 33, '152,160'),
+(49, 10, 100, '77,85'),
+(50, 10, 10, '78,85'),
+(51, 10, 19, '79,85');
 
 -- --------------------------------------------------------
 

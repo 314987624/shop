@@ -50,4 +50,6 @@ return [
     'sql_explain'    => false,
     // 数据库表前缀
     'prefix'          => '',
+    //可以对象转数组 toArray
+    'resultset_type' => '\think\Collection',
 ];
