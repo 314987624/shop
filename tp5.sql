@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2017-07-28 16:11:16
+-- Generation Time: 2017-07-31 13:41:17
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -156,6 +156,32 @@ INSERT INTO `attr` (`id`, `attr_name`, `attr_type`, `attr_value`, `type_id`) VAL
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `attr_value`
+--
+
+CREATE TABLE IF NOT EXISTS `attr_value` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `attr_id` mediumint(9) NOT NULL COMMENT '属性ID',
+  `attr_value` varchar(60) NOT NULL COMMENT '属性值',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- 转存表中的数据 `attr_value`
+--
+
+INSERT INTO `attr_value` (`id`, `attr_id`, `attr_value`) VALUES
+(1, 18, 'M'),
+(2, 18, 'ML'),
+(3, 18, 'XML'),
+(4, 17, '黑色'),
+(5, 17, '白色'),
+(6, 17, '红色'),
+(7, 17, '蓝色');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `brand`
 --
 
@@ -244,7 +270,7 @@ INSERT INTO `cate` (`id`, `cate_name`, `pid`, `search_attr_id`) VALUES
 (60, '登山攀岩', 52, '0'),
 (61, '户外背包', 52, '0'),
 (62, '户外照明', 52, '0'),
-(63, '裙子', 33, '18,23,17,19,20');
+(63, '裙子', 33, '18,19,23,17');
 
 -- --------------------------------------------------------
 
@@ -340,9 +366,9 @@ INSERT INTO `goods` (`id`, `goods_name`, `goods_sn`, `original`, `sm_thumb`, `mi
 (15, '猛男皮夹克', '1499922658918511', './uploads/goods/965149994924620762.jpg', './uploads/goods/sm_965149994924620762.jpg', './uploads/goods/mid_965149994924620762.jpg', './uploads/goods/max_965149994924620762.jpg', '222.00', '111.00', 1, 28, 5, 4, '', '23.00', 0, 0),
 (16, '男毛衫', '1499922741333197', './uploads/goods/29743149994923131292.jpg', './uploads/goods/sm_29743149994923131292.jpg', './uploads/goods/mid_29743149994923131292.jpg', './uploads/goods/max_29743149994923131292.jpg', '222.00', '111.00', 1, 19, 7, 4, '', '22.00', 0, 0),
 (17, '型男服装', '1499922817280110', './uploads/goods/2868114999492188718.jpg', './uploads/goods/sm_2868114999492188718.jpg', './uploads/goods/mid_2868114999492188718.jpg', './uploads/goods/max_2868114999492188718.jpg', '222.00', '221.00', 1, 29, 2, 4, '<p>111</p>', '21.00', 0, 1501215978),
-(18, '美女短裤', '1499922906143581', './uploads/goods/2006514999491427558.jpg', './uploads/goods/sm_2006514999491427558.jpg', './uploads/goods/mid_2006514999491427558.jpg', './uploads/goods/max_2006514999491427558.jpg', '222.00', '211.00', 1, 43, 2, 4, '', '11.00', 0, 0),
-(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p>11</p>', '11.00', 0, 0),
-(20, '美女服饰', '1500186108882269', './uploads/goods/13918150018610831295.jpg', './uploads/goods/sm_13918150018610831295.jpg', './uploads/goods/mid_13918150018610831295.jpg', './uploads/goods/max_13918150018610831295.jpg', '222.00', '111.00', 1, 35, 2, 4, '<p><br/></p><p><br/><img alt="" id="a89a52c365c84d00b5d382b7b8d75e78 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t5434/124/94368989/242488/4016ef80/58f8874fNe68bf2cf.jpg"/><img alt="" id="3ac873f99b114250b08e3aac61697076 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t4945/229/1755173706/428637/699a5cf8/58f470aaNf01df63f.jpg"/></p>', '11.00', 0, 0);
+(18, '美女短裤', '1499922906143581', './uploads/goods/2006514999491427558.jpg', './uploads/goods/sm_2006514999491427558.jpg', './uploads/goods/mid_2006514999491427558.jpg', './uploads/goods/max_2006514999491427558.jpg', '222.00', '211.00', 1, 63, 2, 4, '', '11.00', 0, 1501492077),
+(19, '大气时尚女装', '1499950293655219', './uploads/goods/25980149995029311781.jpg', './uploads/goods/sm_25980149995029311781.jpg', './uploads/goods/mid_25980149995029311781.jpg', './uploads/goods/max_25980149995029311781.jpg', '222.00', '111.00', 1, 63, 2, 4, '<p>11</p>', '11.00', 0, 1501492008),
+(20, '美女服饰', '1500186108882269', './uploads/goods/13918150018610831295.jpg', './uploads/goods/sm_13918150018610831295.jpg', './uploads/goods/mid_13918150018610831295.jpg', './uploads/goods/max_13918150018610831295.jpg', '222.00', '111.00', 1, 63, 2, 4, '<p><br/></p><p><br/><img alt="" id="a89a52c365c84d00b5d382b7b8d75e78 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t5434/124/94368989/242488/4016ef80/58f8874fNe68bf2cf.jpg"/><img alt="" id="3ac873f99b114250b08e3aac61697076 " class="" src="//img30.360buyimg.com/popWaterMark/jfs/t4945/229/1755173706/428637/699a5cf8/58f470aaNf01df63f.jpg"/></p>', '11.00', 0, 1501492092);
 
 -- --------------------------------------------------------
 
@@ -830,10 +856,10 @@ INSERT INTO `recvalue` (`valueid`, `recid`, `rectype`) VALUES
 (16, 2, 1),
 (17, 4, 1),
 (17, 2, 1),
+(18, 7, 1),
 (18, 4, 1),
 (18, 3, 1),
 (18, 2, 1),
-(18, 7, 1),
 (13, 2, 1),
 (10, 2, 1),
 (9, 7, 1);

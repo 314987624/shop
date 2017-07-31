@@ -65,10 +65,10 @@ class Cate extends Common
         }else{
             $list = $this->cate->cate_tree();
             $recpos_list = Db::table('recpos')->where('rectype',2)->select();
-            $type_lsit = Db::table('type')->select();
+            $type_list = Db::table('type')->select();
             $this->assign('list',$list);
             $this->assign('recpos_list',$recpos_list);
-            $this->assign('type_list',$type_lsit);
+            $this->assign('type_list',$type_list);
             return $this->fetch();
         }
     }
@@ -80,6 +80,15 @@ class Cate extends Common
                 $data = $this->request->post();
                 @$recid = $data['recid'];
                 unset($data['recid']);
+                $data['attr_id'] = array_unique($data['attr_id']);
+                foreach($data['attr_id'] as $k => $v){
+                    if($v == '0'){
+                        unset($data['attr_id'][$k]);
+                    }
+                }
+                $data['search_attr_id'] = implode(',',$data['attr_id']);
+                unset($data['attr_id']);
+                unset($data['type_id']);
                 $this->cate->validate(
                     [
                         'cate_name' => 'require|max:20'
@@ -107,17 +116,26 @@ class Cate extends Common
         }else{
             if(is_numeric($id)){
                 $list = $this->cate->cate_tree();
-                $data = $this->cate->get($id);
+                $data = $this->cate->get($id)->toArray();
                 $recpos_list = Db::table('recpos')->where('rectype',2)->select();
                 $recid = Db::table('recvalue')->field('recid')->where(['valueid'=>$id,'rectype'=>2])->select();
                 $recids = array();
                 foreach($recid as $v){
                     $recids[] = $v['recid'];
                 }
+                $type_list = Db::table('type')->select();
+                $attr = Db::table('attr')->where(['id'=>['in',$data['search_attr_id']]])->select();
+                if(!$attr){
+                    $attr[0]['type_id'] = 0;
+                }
+                $attr_all = Db::table('attr')->where('type_id',$attr[0]['type_id'])->select();
                 $this->assign('data', $data);
                 $this->assign('list', $list);
                 $this->assign('recpos_list',$recpos_list);
                 $this->assign('recids',$recids);
+                $this->assign('type_list',$type_list);
+                $this->assign('attr',$attr);
+                $this->assign('attr_all',$attr_all);
                 return $this->fetch();
             }else{
                 $this->error('非法操作');

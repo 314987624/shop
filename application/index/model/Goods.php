@@ -26,8 +26,7 @@ class Goods extends Model
         $cate_ids = $cate->getChildrenCateIds($cate_id);
         $map['cate_id'] = ['in',$cate_ids];
         $brand = $this->alias('g')->join('brand b','g.brand_id = b.id')
-            ->field('b.id,b.brand_name')->where($map)->select()->toArray();
-        dump($brand);
+            ->field('DISTINCT b.id,b.brand_name')->where($map)->select()->toArray();
         //价格
         $shop_price = $this->field('max(shop_price) as max_price,min(shop_price) as min_price')
             ->find()->toArray();
@@ -41,7 +40,26 @@ class Goods extends Model
                 $shop_price['min_price'] += $cha;
             }
         }
-        dump($price);
+        //属性
+        $cate = Db::table('cate')->field('search_attr_id')->find($cate_id);
+        $attr = Db::table('attr')->field('id,attr_name')->where(['id'=>['in',$cate['search_attr_id']],'attr_type'=>1])->select();
+        foreach($attr as $k => $v){
+            $attr_value = Db::table('goods_attr')->field('DISTINCT attr_id,attr_value')->where(['attr_id'=>$v['id']])->select();
+            if(!$attr_value){
+                unset($attr[$k]);
+            }else{
+                foreach($attr_value as $k2 => $v2){
+                    $value = Db::table('attr_value')->where(['attr_id'=>$v2['attr_id'],'attr_value'=>$v2['attr_value']])->find();
+                    $attr_value[$k2]['id'] = $value['id'];
+                }
+                $attr[$k]['value'] = $attr_value;
+            }
+        }
+        return [
+            'brand' => $brand,
+            'price' => $price,
+            'attr' => $attr
+        ];
     }
 
 }

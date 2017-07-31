@@ -111,69 +111,48 @@
         <div class="box">
             <div class="box_1">
                 <h3><span>商品筛选</span></h3>
+                {if condition="$filter.brand neq null"}
                 <div class="screeBox">
                     <strong>品牌：</strong>
                     <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=2&amp;price_min=0&amp;price_max=0">APPLE</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=3&amp;price_min=0&amp;price_max=0">方正</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=4&amp;price_min=0&amp;price_max=0">希捷</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=5&amp;price_min=0&amp;price_max=0">漫步者</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=6&amp;price_min=0&amp;price_max=0">天翼</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=7&amp;price_min=0&amp;price_max=0">美的</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=11&amp;price_min=0&amp;price_max=0"> 恒基伟业</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;brand=43&amp;price_min=0&amp;price_max=0">帮宝适</a>&nbsp;
+                    {volist name="filter.brand" id="vo"}
+                    <a href="">{$vo.brand_name}</a>&nbsp;
+                    {/volist}
                 </div>
+                {/if}
                 <div class="screeBox">
                     <strong>价格：</strong>
                     <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=100&amp;price_max=110">100&nbsp;-&nbsp;110</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=120&amp;price_max=130">120&nbsp;-&nbsp;130</a>&nbsp;
+                    {volist name="filter.price" id="vo"}
+                    <a href="">{$vo}</a>&nbsp;
+                    {/volist}
                 </div>
+                {php}
+                    $len = count($filter['attr']);
+                    if(request()->param('attr')){
+                        $arr = explode('.',request()->param('attr'));
+                    }else{
+                        @$arr = array_fill(0,$len,0);
+                    }
+                {/php}
+                {foreach name="filter.attr" item="vo" key="k" }
                 <div class="screeBox">
-                    <strong>袖型 :</strong>
+                    <strong>{$vo.attr_name} :</strong>
                     <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=2839.0.0.0.0">七分袖</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=2841.0.0.0.0">无袖</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=2836.0.0.0.0">短袖</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=2203.0.0.0.0">长袖</a>&nbsp;
+                    {volist name="vo.value" id="vo2"}
+                    {php}
+                        $tmpArr = $arr;
+                        $tmpArr[$k] = $vo2['id'];
+                        $str = implode('.',$tmpArr);
+                    {/php}
+                    {if condition="request()->param('attr') eq $str"}
+                        <span>{$vo2.attr_value}</span>&nbsp;
+                    {else/}
+                        <a href="{:url('index',['id'=>$id,'attr'=>$str])}">{$vo2.attr_value}</a>&nbsp;
+                    {/if}
+                    {/volist}
                 </div>
-                <div class="screeBox">
-                    <strong>尺寸 :</strong>
-                    <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.2149.0.0.0">L</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.2150.0.0.0">M</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.2148.0.0.0">XL</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.2151.0.0.0">XXL</a>&nbsp;
-                </div>
-                <div class="screeBox">
-                    <strong>颜色 :</strong>
-                    <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.2145.0.0">红</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.2146.0.0">蓝</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.2147.0.0">黄</a>&nbsp;
-                </div>
-                <div class="screeBox">
-                    <strong>风格 :</strong>
-                    <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2847.0">卡通</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2837.0">日韩</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2842.0">民族</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2834.0">甜美淑女</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2840.0">简约</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2852.0">英伦学院</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.2844.0">街头</a>&nbsp;
-                </div>
-                <div class="screeBox">
-                    <strong>花型 :</strong>
-                    <span>全部</span>
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2838">印花/绣花</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2845">大方格</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2835">小碎花</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2833">撞色</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2843">条纹</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2850">波点</a>&nbsp;
-                    <a href="mbmeilishuo/category.php?id=21&amp;price_min=0&amp;price_max=0&amp;filter_attr=0.0.0.0.2224">素色</a>&nbsp;
-                </div>
+                {/foreach}
             </div>
         </div>
         <div class="blank"></div>
